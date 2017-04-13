@@ -1,15 +1,16 @@
 {
   "ignore": [
     ".git",
-    "node_modules/**/node_modules"
+    "node_modules"
   ],
   "verbose": true,
   "watch": [
     "src/",
-    "views/"
+    "config/",
+    ".env"
   ],
   "env": {
     "NODE_ENV": "development"
   },
-  "ext": "js json html css"
+  "ext": "js json html css env"
 }
