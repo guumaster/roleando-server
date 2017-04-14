@@ -11,6 +11,11 @@ const validate = require('./validator')
 const link = require('./link')
 const db = require('../db')
 
+const DEFAULT_DATA = {
+  listed: true,
+  featured: false
+}
+
 const generators = db.get('generator_tables')
 const slugify = str => slug((str || '').toLowerCase())
 
@@ -20,12 +25,14 @@ const prepare = table => {
 }
 const prepareList = partialRight(map, prepare)
 
-const findAll = () => generators.find().then(prepareList)
-const findFeatured = () => generators.find({featured: true}).then(prepareList)
+const findAll = () => generators.find({listed: true}).then(prepareList)
+const findFeatured = () => generators.find({listed: true, featured: true}).then(prepareList)
 const findById = id => generators.findOne({id}).then(prepare)
 
-const save = (inputId, data) => validate(data).then(() => {
+const save = (inputId, inputData) => validate(inputData).then(() => {
   const id = inputId || shortid.generate()
+
+  const data = merge({}, DEFAULT_DATA, inputData)
 
   const time = inputId ? 'updatedAt' : 'createdAt'
   data[time] = new Date()
@@ -64,6 +71,20 @@ const checkOwner = (user, id) => {
     })
 }
 
+const setFeatured = (id, featured) => {
+  return generators
+    .update({id}, {
+      $set: {featured}
+    })
+}
+
+const setListed = (id, listed) => {
+  return generators
+    .update({id}, {
+      $set: {listed: listed}
+    })
+}
+
 module.exports = {
   findById,
   findAll,
@@ -71,5 +92,7 @@ module.exports = {
   save,
   fork,
   remove,
-  checkOwner
+  checkOwner,
+  setFeatured,
+  setListed
 }
