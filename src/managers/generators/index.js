@@ -6,6 +6,7 @@ const merge = require('lodash/merge')
 const clone = require('lodash/clone')
 const map = require('lodash/map')
 const partialRight = require('lodash/partialRight')
+const unset = require('lodash/unset')
 
 const validate = require('./validator')
 const link = require('./link')
@@ -15,19 +16,20 @@ const DEFAULT_DATA = {
   listed: true,
   featured: false
 }
+const dontExists = {$exists: false}
 
 const generators = db.get('generator_tables')
 const slugify = str => slug((str || '').toLowerCase())
 
 const prepare = table => {
-  delete table._id
+  unset(table, ['_id', 'listed', 'deleted'])
   return link(table)
 }
 const prepareList = partialRight(map, prepare)
 
-const findAll = () => generators.find({listed: true, deleted: false }).then(prepareList)
-const findFeatured = () => generators.find({listed: true, featured: true, deleted: false}).then(prepareList)
-const findById = id => generators.findOne({id, deleted: false}).then(prepare)
+const findAll = () => generators.find({listed: true, deleted: dontExists}).then(prepareList)
+const findFeatured = () => generators.find({listed: true, featured: true, deleted: dontExists}).then(prepareList)
+const findById = id => generators.findOne({id, deleted: dontExists}).then(prepare)
 
 const save = (inputId, inputData) => validate(inputData).then(() => {
   const id = inputId || shortid.generate()
@@ -41,7 +43,7 @@ const save = (inputId, inputData) => validate(inputData).then(() => {
   return generators
     .findOneAndUpdate({
       id,
-      deleted: false
+      deleted: dontExists
     }, {
       $set: data
     }, {upsert: true})
@@ -49,7 +51,7 @@ const save = (inputId, inputData) => validate(inputData).then(() => {
 })
 
 const fork = (id, author) => {
-  return generators.findOne({id, deleted: false})
+  return generators.findOne({id, deleted: dontExists})
     .then(parent => {
       if (!parent) {
         return
@@ -62,7 +64,7 @@ const fork = (id, author) => {
 }
 
 const remove = (id) => {
-  return generators.findOneAndUpdate({id}, { $set: { deleted: true } })
+  return generators.findOneAndUpdate({id}, {$set: {deleted: dontExists}})
 }
 
 const checkOwner = (user, id) => {
