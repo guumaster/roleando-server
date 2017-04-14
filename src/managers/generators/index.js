@@ -25,9 +25,9 @@ const prepare = table => {
 }
 const prepareList = partialRight(map, prepare)
 
-const findAll = () => generators.find({listed: true}).then(prepareList)
-const findFeatured = () => generators.find({listed: true, featured: true}).then(prepareList)
-const findById = id => generators.findOne({id}).then(prepare)
+const findAll = () => generators.find({listed: true, deleted: false }).then(prepareList)
+const findFeatured = () => generators.find({listed: true, featured: true, deleted: false}).then(prepareList)
+const findById = id => generators.findOne({id, deleted: false}).then(prepare)
 
 const save = (inputId, inputData) => validate(inputData).then(() => {
   const id = inputId || shortid.generate()
@@ -40,7 +40,8 @@ const save = (inputId, inputData) => validate(inputData).then(() => {
 
   return generators
     .findOneAndUpdate({
-      id
+      id,
+      deleted: false
     }, {
       $set: data
     }, {upsert: true})
@@ -48,7 +49,7 @@ const save = (inputId, inputData) => validate(inputData).then(() => {
 })
 
 const fork = (id, author) => {
-  return findById(id)
+  return generators.findOne({id, deleted: false})
     .then(parent => {
       if (!parent) {
         return
@@ -61,7 +62,7 @@ const fork = (id, author) => {
 }
 
 const remove = (id) => {
-  return generators.findOneAndDelete({id})
+  return generators.findOneAndUpdate({id}, { $set: { deleted: true } })
 }
 
 const checkOwner = (user, id) => {

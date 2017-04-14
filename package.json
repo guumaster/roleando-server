@@ -7,7 +7,8 @@
     "dev": "nodemon -L bin/server",
     "lint": "eslint src bin",
     "lint:fix": "npm run lint -- --fix",
-    "start": "node bin/server"
+    "start": "node bin/server",
+    "backup-heroku": "node bin/heroku_to_local"
   },
   "author": "guumaster",
   "license": "ISC",
@@ -42,6 +43,8 @@
     "eslint-plugin-node": "4.2.2",
     "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-standard": "3.0.1",
+    "mongodb-backup": "1.6.9",
+    "mongodb-restore": "1.6.2",
     "nodemon": "1.11.0"
   },
   "engines": {
