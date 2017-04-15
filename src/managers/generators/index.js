@@ -22,6 +22,7 @@ const generators = db.get('generator_tables')
 const slugify = str => slug((str || '').toLowerCase())
 
 const prepare = table => {
+  if (!table) return
   unset(table, ['_id', 'listed', 'deleted'])
   return link(table)
 }
@@ -64,7 +65,7 @@ const fork = (id, author) => {
 }
 
 const remove = (id) => {
-  return generators.findOneAndUpdate({id}, {$set: {deleted: dontExists}})
+  return generators.findOneAndUpdate({id}, {$set: {deleted: true}})
 }
 
 const checkOwner = (user, id) => {

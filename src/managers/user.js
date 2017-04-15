@@ -1,6 +1,7 @@
 'use strict'
 
 const pick = require('lodash/pick')
+const get = require('lodash/get')
 const config = require('config')
 
 const db = require('./db')
@@ -10,6 +11,12 @@ const tokenManager = require('./token')
 const PUBLIC_PROFILE_KEYS = 'name email picture'.split(' ')
 
 const users = db.get('users')
+
+const auth0login = accessToken => {
+  return auth0
+    .getUserInfo(accessToken)
+    .then(updateProfile)
+}
 
 const updateProfile = profile => {
   return users
@@ -23,16 +30,12 @@ const updateProfile = profile => {
     }, {upsert: true})
 }
 
-const auth0login = accessToken => {
-  return auth0
-    .getUserInfo(accessToken)
-    .then(updateProfile)
-}
-
 const generateTokens = user => {
   if (!user) throw new Error('Missing user info')
 
   const publicProfile = pick(user.profile, PUBLIC_PROFILE_KEYS)
+  publicProfile.id = user.profileId
+  publicProfile.isAdmin = get(user, 'profile.app_metadata.isAdmin', false)
   const response = tokenManager.createTokens(user.profileId, publicProfile)
   response.profile = publicProfile
   return response
