@@ -6,17 +6,16 @@ const generators = require('../../../managers/generators')
 const notifyNew = require('../../../managers/generators/notifier')
 
 module.exports = (req, res, next) => {
-  let author = {}
+  const author = {
+    id: req.user.profileId,
+    name: req.user.profile.name,
+    picture: req.user.profile.picture
+  }
   let data = {}
   const table = pick(req.body, ['name', 'desc', 'data.tables', 'data.tpls', 'data.remotes'])
   const isNew = !(req.params.id)
 
   if (isNew) {
-    author = {
-      id: req.user.profileId,
-      name: req.user.profile.name,
-      picture: req.user.profile.picture
-    }
     data = merge({author}, table)
   } else {
     // Do NOT modify author data if current user isAdmin
