@@ -21,6 +21,5 @@ app.use(errorHandler)
 
 app.use(routes)
 app.use(statics)
-app.use('*', (req, res) => res.sendFile(`/tmp/test/dist/index.html`))
 
 module.exports = app
