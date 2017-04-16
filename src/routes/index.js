@@ -14,7 +14,7 @@ const router = express.Router()
 const addAdmin = require('../middlewares/add_admin')
 const addAccessToken = require('../middlewares/add_access_token')
 
-router.get('/', (req, res) => {
+router.get('/ping', (req, res) => {
   res.send({
     hello: 'world!'
   })
