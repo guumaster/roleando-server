@@ -13,11 +13,11 @@ const app = express({
   name: config.name
 })
 
-app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(errorHandler)
+app.use(morgan('combined'))
 
 app.use(routes)
 app.use(statics)
