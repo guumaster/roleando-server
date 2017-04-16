@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express')
+const cors = require('cors')
 
 const sitemap = require('./sitemap')
 const auth = require('./auth')
@@ -20,8 +21,8 @@ router.get('/', (req, res) => {
 })
 
 router.use(addAccessToken)
-router.use('/auth', auth)
-router.use('/api', validateToken(), addAdmin, api)
+router.use('/auth', cors(), auth)
+router.use('/api', cors(), validateToken(), addAdmin, api)
 router.use(short)
 
 router.use(sitemap)

@@ -23,6 +23,7 @@ const slugify = str => slug((str || '').toLowerCase())
 
 const prepare = table => {
   if (!table) return
+
   unset(table, ['_id', 'listed', 'deleted'])
   return link(table)
 }
