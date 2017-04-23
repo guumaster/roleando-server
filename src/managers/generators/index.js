@@ -28,9 +28,17 @@ const prepare = table => {
   return link(table)
 }
 const prepareList = partialRight(map, prepare)
+const listOpts = {
+  fields: {data: 0},
+  sort: {createdAt: -1}
+}
 
-const findAll = () => generators.find({listed: true, deleted: dontExists}).then(prepareList)
-const findFeatured = () => generators.find({listed: true, featured: true, deleted: dontExists}).then(prepareList)
+const findAll = () => generators.find({listed: true, deleted: dontExists}, listOpts).then(prepareList)
+const findFeatured = () => generators.find({
+  listed: true,
+  featured: true,
+  deleted: dontExists
+}, listOpts).then(prepareList)
 const findById = id => generators.findOne({id, deleted: dontExists}).then(prepare)
 
 const save = (inputId, inputData) => validate(inputData).then(() => {
