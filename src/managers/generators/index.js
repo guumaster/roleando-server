@@ -11,6 +11,7 @@ const unset = require('lodash/unset')
 const validate = require('./validator')
 const link = require('./link')
 const db = require('../db')
+const addHelperTables = require('./aggregate_subtables')
 
 const DEFAULT_DATA = {
   listed: true,
@@ -39,7 +40,13 @@ const findFeatured = () => generators.find({
   featured: true,
   deleted: dontExists
 }, listOpts).then(prepareList)
-const findById = id => generators.findOne({id, deleted: dontExists}).then(prepare)
+
+const findById = id => {
+  return generators
+    .findOne({id, deleted: dontExists})
+    .then(addHelperTables)
+    .then(prepare)
+}
 
 const save = (inputId, inputData) => validate(inputData).then(() => {
   const id = inputId || shortid.generate()
