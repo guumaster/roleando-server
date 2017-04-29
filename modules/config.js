@@ -2,6 +2,9 @@
 const config = {
   api: {
     baseUrl: ''
+  },
+  auth0: {
+
   }
 }
 // The server-side needs a full url to works

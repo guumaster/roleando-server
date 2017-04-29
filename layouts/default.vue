@@ -13,7 +13,7 @@
     </v-toolbar>
     <main>
       <v-sidebar left fixed drawer v-model="sidebar">
-        <logo />
+        <logo/>
         <menu-list/>
       </v-sidebar>
       <v-content>
@@ -28,10 +28,21 @@
 <script>
   import MenuList from '../components/layout/MenuList.vue'
   import Logo from '../components/layout/Logo.vue'
+  import { mapActions } from 'vuex'
 
   export default {
+    methods: {
+      ...mapActions({
+        loadUserInfo: 'auth/loadUserInfo'
+      })
+    },
+    created () {
+      if (process.BROWSER_BUILD) {
+        this.loadUserInfo()
+      }
+    },
     components: {
-      'menu-list': MenuList,
+      MenuList,
       Logo
     },
     data () {

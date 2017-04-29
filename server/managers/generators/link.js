@@ -1,6 +1,6 @@
 'use strict'
 
-const config = require('config')
+const config = require('../../../config')
 
 module.exports = (generator = {}) => {
   generator.link = `/generadores/${generator.slug}/${generator.id}`

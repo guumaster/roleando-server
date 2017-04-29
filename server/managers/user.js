@@ -1,8 +1,5 @@
-'use strict'
-
-const pick = require('lodash/pick')
-const get = require('lodash/get')
-const config = require('config')
+import {get, pick} from 'lodash'
+import config from '../../config'
 
 const db = require('./db')
 const auth0 = require('./auth0')

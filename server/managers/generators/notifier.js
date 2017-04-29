@@ -1,6 +1,6 @@
 'use strict'
 
-const config = require('config')
+const config = require('../../../config')
 const mailer = require('../mailer')
 
 module.exports = generator => {

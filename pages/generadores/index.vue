@@ -11,14 +11,14 @@
 </template>
 
 <script>
-  import axios from '~plugins/axios'
+  import { generators } from '../../modules/api'
 
   export default {
-    async asyncData () {
-      const {data} = await axios.get('/api/generators/tables')
-      return {
-        list: data
-      }
+    asyncData () {
+      return generators.loadAll()
+        .then(list => {
+          return {list}
+        })
     },
     head () {
       return {

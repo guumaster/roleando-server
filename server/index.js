@@ -1,13 +1,13 @@
 /* eslint-disable  no-console */
 
+
 import Nuxt from 'nuxt'
 import express from 'express'
 import bodyParser from 'body-parser'
 
 import routes from './routes'
+import config from '../config'
 
-require('dotenv').config()
-const config = require('config')
 const nuxtConfig = require('../nuxt.config.js')
 
 const app = express({

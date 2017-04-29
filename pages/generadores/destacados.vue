@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import { generators } from '~plugins/api'
+  import { generators } from '../../modules/api'
 
   export default {
     asyncData () {

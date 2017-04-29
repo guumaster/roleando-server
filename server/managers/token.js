@@ -1,7 +1,7 @@
-'use strict'
-const jwt = require('jsonwebtoken')
-const ms = require('ms')
-const config = require('config')
+import ms from 'ms'
+import jwt from 'jsonwebtoken'
+
+import config from '../../config'
 
 const createTokens = (profileId, profile) => {
   const aToken = config.auth.token

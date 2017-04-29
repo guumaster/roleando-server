@@ -16,7 +16,7 @@
       <li>
         <nuxt-link :to="{ name: 'generadores' }">generadores</nuxt-link>
       </li>
-      <li >
+      <li>
         <nuxt-link :to="{ name: 'generadores-destacados' }">destacados</nuxt-link>
       </li>
 

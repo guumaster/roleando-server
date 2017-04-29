@@ -1,11 +1,12 @@
 const {join} = require('path')
+const config = require('./config/browser')
 
 const dev = !(process.env.NODE_ENV === 'production')
 const label = dev ? '(local) ' : ''
 
 module.exports = {
   dev,
-
+  env: config,
   /*
    ** Headers of the page
    */
@@ -15,6 +16,9 @@ module.exports = {
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {hid: 'description', name: 'description', content: 'Roleando!'}
+    ],
+    script: [
+      {src: 'https://cdn.auth0.com/js/lock/10.14/lock.min.js'}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
@@ -40,26 +44,15 @@ module.exports = {
     '~plugins/axios.js',
     '~plugins/vuetify.js',
     '~plugins/vueawesome.js',
-    '~plugins/api/index.js',
+    '~plugins/config.js',
+    // '~plugins/api/index.js',
 //    '~plugins/vuex-router-sync.js'
   ],
   css: [
     {src: join(__dirname, 'css/app.styl'), lang: 'styl'}
   ],
   build: {
-    vendor: ['vue-awesome', 'vuetify', 'axios'],
-    /*
-     ** Run ESLINT on save
-     */
-    extend (config, ctx) {
-      if (false && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
+    vendor: ['localforage', 'vue-awesome', 'vuetify', 'axios', '@guumaster/rpgen']
+
   }
 }

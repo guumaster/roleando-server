@@ -46,6 +46,18 @@
         </v-list-tile-content>
       </v-list-tile>
     </v-list-item>
+
+    <v-divider light/>
+    <v-list-item>
+      <v-list-tile :href="{name: 'auth-login'}" router>
+        <v-list-tile-action>
+          <v-icon>widgets</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Login</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list-item>
   </v-list>
 </template>
 <script>

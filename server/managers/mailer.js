@@ -1,9 +1,8 @@
-'use strict'
 
-const config = require('config')
-const merge = require('lodash/merge')
-const nodemailer = require('nodemailer')
-const transport = require('nodemailer-sendgrid-transport')
+import nodemailer from 'nodemailer'
+import transport from 'nodemailer-sendgrid-transport'
+import {merge} from 'lodash'
+import config from '../../config'
 
 const DEFAULT_OPTIONS = {
   to: config.mailRecipient,

@@ -1,7 +1,7 @@
-'use strict'
+import jwt from 'express-jwt'
 
-const jwt = require('express-jwt')
-const config = require('config')
+import config from '../../config'
+
 const options = config.auth.token
 
 module.exports = ({required = false} = {}) => jwt({

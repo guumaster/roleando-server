@@ -9,8 +9,6 @@
 <script>
   import axios from '~plugins/axios'
 
-  import { mapState } from 'vuex'
-
   export default {
     computed: {
     },

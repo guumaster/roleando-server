@@ -1,7 +1,6 @@
-'use strict'
+import auth0 from 'auth0-js'
 
-const config = require('config')
-const auth0 = require('auth0-js')
+import config from '../../config'
 
 const client = new auth0.Authentication({
   domain: config.auth0.domain,
