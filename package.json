@@ -8,7 +8,7 @@
   "scripts": {
     "precommit": "npm run lint",
     "lint": "eslint --ext .js,.vue .",
-    "dev": "nodemon --exec babel-node server/index.js",
+    "dev": "nodemon -w server --exec babel-node server/index.js",
     "clean": "rm -rf build .nuxt",
     "prebuild": "npm run clean",
     "build": "npm run build:server && npm run build:nuxt",

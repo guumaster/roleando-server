@@ -6,14 +6,15 @@
 
       <v-spacer></v-spacer>
       <v-btn icon dark>
-        <icon name="user-circle" scale="2"></icon>
-        <!--<v-icon>account_circle</v-icon>-->
-
+        <avatar v-if="profilePicture" size="small" :src="profilePicture"/>
+        <icon v-else name="user-circle" scale="2"></icon>
       </v-btn>
     </v-toolbar>
     <main>
       <v-sidebar left fixed drawer v-model="sidebar">
-        <nuxt-link to="/"><logo size="normal"/></nuxt-link>
+        <nuxt-link to="/">
+          <logo size="normal" class="mt-3 mb-3"/>
+        </nuxt-link>
         <menu-list/>
       </v-sidebar>
       <v-content class="blue-grey lighten-4">
@@ -31,21 +32,28 @@
 
 <script>
   import MenuList from '../components/layout/MenuList.vue'
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters, mapState } from 'vuex'
 
   export default {
+    components: {
+      MenuList
+    },
+    computed: {
+      ...mapGetters('auth', ['isLogged']),
+      ...mapState('auth', ['user']),
+      profilePicture () {
+        if (!this.isLogged) return
+
+        return `${this.user.profile.picture}?sz=50`
+      }
+    },
     methods: {
-      ...mapActions({
-        loadUserInfo: 'auth/loadUserInfo'
-      })
+      ...mapActions('auth', ['loadUserInfo'])
     },
     created () {
       if (process.BROWSER_BUILD) {
         this.loadUserInfo()
       }
-    },
-    components: {
-      MenuList
     },
     data () {
       return {

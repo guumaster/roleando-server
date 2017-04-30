@@ -48,7 +48,9 @@
     </v-list-item>
 
     <v-divider light/>
-    <v-list-item>
+    <v-subheader>Ajustes</v-subheader>
+
+    <v-list-item v-if="!isLogged">
       <v-list-tile :href="{name: 'auth-login'}" router>
         <v-list-tile-action>
           <v-icon>widgets</v-icon>
@@ -61,7 +63,11 @@
   </v-list>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   export default {
-    name: 'menu-list'
+    name: 'menu-list',
+    computed: {
+      ...mapGetters('auth', ['isLogged'])
+    }
   }
 </script>

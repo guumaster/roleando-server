@@ -33,7 +33,7 @@
   }
 
   .size-big {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 5rem;
+    max-height: 5rem;
   }
 </style>

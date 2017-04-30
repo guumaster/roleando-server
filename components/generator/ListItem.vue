@@ -13,9 +13,7 @@
           <v-list-tile-sub-title v-text="generator.desc"/>
         </v-list-tile-content>
 
-        <v-list-tile-avatar>
           <avatar size="small" :src="generator.author.picture"/>
-        </v-list-tile-avatar>
 
       </v-list-tile>
     </v-list-item>

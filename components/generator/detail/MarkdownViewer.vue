@@ -1,6 +1,13 @@
 <template>
-  <div class="text-box">
-    <vue-markdown class="viewer" :source="generatedText" @rendered="copyRawText"></vue-markdown>
+  <div class="text-box ">
+    <v-card class="bluegray darken-1 text">
+      <v-card-text class="">
+        <slot class="generate" name="button"></slot>
+
+        <vue-markdown class=" text-xs-justify mt-2" :source="generatedText"
+                      @rendered="copyRawText"></vue-markdown>
+      </v-card-text>
+    </v-card>
   </div>
 </template>
 
@@ -16,9 +23,6 @@
       }
     },
     computed: {
-//      onlyClient () {
-//        return process.BROWSER_BUILD
-//      },
       generatedText () {
         return this.text || '\n\n\n#### No hay plantilla'
       }
@@ -34,12 +38,13 @@
     }
   }
 </script>
-<style>
+<style scoped>
   .text-box {
-    padding: 0.7em;
-    text-align: justify;
+    display: flex;
+    flex-direction: column;
   }
-  .viewer {
-    min-height: 30vh;
+
+  .text {
+    flex-grow: 1;
   }
 </style>

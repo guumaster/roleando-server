@@ -1,5 +1,7 @@
 <template>
-  <img :class="classSize" class="elevation-2" :src="src"/>
+  <div class="avatar ma-1">
+    <img :class="classSize" class="elevation-2" :src="src"/>
+  </div>
 </template>
 <script>
   export default {
