@@ -1,8 +1,8 @@
 {
   "name": "Roleando App",
   "short_name": "Roleando",
-  "theme_color": "#027be3",
-  "background_color": "#6888a2",
+  "theme_color": "#524671",
+  "background_color": "#7f7c8a",
   "display": "standalone",
   "Scope": "/",
   "start_url": "/",

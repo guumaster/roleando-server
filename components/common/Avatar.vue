@@ -1,33 +1,37 @@
 <template>
-        <img :class="classSize" class="item-primary avatar shadow-2" :src="src"/>
+  <img :class="classSize" class="elevation-2" :src="src"/>
 </template>
 <script>
-    export default {
-      props: {
-        src: {
-          type: String
-        },
-        size: {
-          type: String,
-          default: 'normal'
-        }
+  export default {
+    props: {
+      src: {
+        type: String
       },
-      computed: {
-        classSize () {
-          return `size-${this.size.trim().toLowerCase()}`
-        }
+      size: {
+        type: String,
+        default: 'normal'
+      }
+    },
+    computed: {
+      classSize () {
+        return `size-${this.size.trim().toLowerCase()}`
       }
     }
+  }
 </script>
 <style>
-    .size-small {
-        width: 30px;
-        max-width: 30px;
-        max-height: 30px;
-    }
-    .size-normal {
-        max-width: 50px;
-        max-height: 50px;
-    }
+  .size-small {
+    width: 30px !important;
+    height: 30px !important;
+    max-width: 30px !important;
+    max-height: 30px !important;
+  }
+
+  .size-normal {
+    width: 50px !important;
+    height: 50px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+  }
 
 </style>

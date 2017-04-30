@@ -1,19 +1,19 @@
 <template>
   <div>
-    <h3>Here goes a generator list</h3>
-    <div>
-      <div v-for="generator in list">
-        {{generator.name}}
-      </div>
-    </div>
-
+    <generator-list :list="list">
+      <div slot="title">Generadores Aleatorios</div>
+    </generator-list>
   </div>
 </template>
 
 <script>
   import { generators } from '../../modules/api'
+  import { GeneratorList } from '../../components/generator'
 
   export default {
+    components: {
+      GeneratorList
+    },
     asyncData () {
       return generators.loadAll()
         .then(list => {

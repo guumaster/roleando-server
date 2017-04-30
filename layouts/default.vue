@@ -1,6 +1,6 @@
 <template>
-  <v-app top-toolbar>
-    <v-toolbar>
+  <v-app top-toolbar class="blue-grey lighten-4">
+    <v-toolbar fixed>
       <v-toolbar-side-icon @click.native.stop="sidebar = !sidebar"/>
       <v-toolbar-title>Roleando</v-toolbar-title>
 
@@ -13,12 +13,16 @@
     </v-toolbar>
     <main>
       <v-sidebar left fixed drawer v-model="sidebar">
-        <logo/>
+        <nuxt-link to="/"><logo size="normal"/></nuxt-link>
         <menu-list/>
       </v-sidebar>
-      <v-content>
-        <v-container fluid class="text-xs-center">
-          <nuxt/>
+      <v-content class="blue-grey lighten-4">
+        <v-container fluid class="mt-5 pt-3 text-xs-center">
+          <v-row>
+            <v-col xs12 md8 offset-md2>
+              <nuxt/>
+            </v-col>
+          </v-row>
         </v-container>
       </v-content>
     </main>
@@ -27,7 +31,6 @@
 
 <script>
   import MenuList from '../components/layout/MenuList.vue'
-  import Logo from '../components/layout/Logo.vue'
   import { mapActions } from 'vuex'
 
   export default {
@@ -42,8 +45,7 @@
       }
     },
     components: {
-      MenuList,
-      Logo
+      MenuList
     },
     data () {
       return {
@@ -52,3 +54,8 @@
     }
   }
 </script>
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>

@@ -3,11 +3,14 @@ host: HOST
 mailRecipient: MAIL_RECIPIENT
 database:
   url: MONGODB_URI
+api:
+  baseUrl: API_BASE_URL
 auth:
   token:
     secret: TOKEN_SECRET
   adminUsers: ADMIN_USERS
 auth0:
+    callbackUrl: AUTH0_CALLBACK_URL
     domain: AUTH0_DOMAIN
     clientId: AUTH0_CLIENT_ID
 sendgrid:

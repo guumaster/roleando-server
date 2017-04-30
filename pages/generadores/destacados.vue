@@ -1,27 +1,19 @@
 <template>
   <div>
-    <h3>Here goes a featured generator list</h3>
-    <div>
-      <div v-for="generator in list">
-        {{generator.name}}
-        <nuxt-link :to="{
-          name: 'generadores-slug-id',
-          params: {
-            slug: generator.slug,
-            id: generator.id
-          }
-        }">{{generator.id}}
-        </nuxt-link>
-      </div>
-    </div>
-
+    <generator-list :list="list" featured>
+      <div slot="title">Generadores Aleatorios Destacados</div>
+    </generator-list>
   </div>
 </template>
 
 <script>
   import { generators } from '../../modules/api'
+  import { GeneratorList } from '../../components/generator'
 
   export default {
+    components: {
+      GeneratorList
+    },
     asyncData () {
       return generators.loadFeatured()
         .then(list => {

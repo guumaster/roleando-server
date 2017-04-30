@@ -16,16 +16,17 @@
         return
       }
 
-      const AUTH0_CALBACK_URL = config.auth0.callbackUrl // 'http://localhost:8080/auth/callback'
-      const AUTH0_CLIENT_ID = config.auth0.clientId // 'svPGoiyOL7nFhSf4UnjZu6v2YBid26t4'
-      const AUTH0_DOMAIN = config.auth0.domain // 'guumaster.eu.auth0.com'
+      const AUTH0_CALLBACK_URL = config.auth0.callbackUrl
+      const AUTH0_CLIENT_ID = config.auth0.clientId
+      const AUTH0_DOMAIN = config.auth0.domain
 
       const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, { // eslint-disable-line no-undef
         auth: {
-          redirectUrl: AUTH0_CALBACK_URL,
+          redirectUrl: AUTH0_CALLBACK_URL,
           responseType: 'token'
         }
       })
+
       lock.on('authenticated', async (authResult) => {
         console.log('Auth0 token: ', authResult.idToken)
         this.login(authResult)
@@ -40,15 +41,9 @@
     },
     methods: {
       ...mapActions({
-        login: 'auth/login',
-        loadUserInfo: 'auth/loadUserInfo',
-        logout: 'auth/logout'
+        login: 'auth/login'
       }),
-      ...mapGetters(['auth/isLogged']),
-      doLogout () {
-        this.logout()
-        this.$router.push('/')
-      }
+      ...mapGetters(['auth/isLogged'])
     }
   }
 </script>

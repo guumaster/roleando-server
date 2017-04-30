@@ -3,7 +3,7 @@
     <v-divider light/>
     <v-subheader>Generadores</v-subheader>
     <v-list-item>
-      <v-list-tile :href="{name: 'generadores' }" router>
+      <v-list-tile :href="{name: 'generadores' }" router ripple>
         <v-list-tile-action>
           <v-icon>home</v-icon>
         </v-list-tile-action>
