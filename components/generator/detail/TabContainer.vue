@@ -1,6 +1,6 @@
 <template>
-  <div class="white elevation-0">
-    <v-tabs id="tabs" grow @input="test" class="elevation-0">
+  <div class="white">
+    <v-tabs id="tabs" grow scroll-bars @input="test" >
 
       <v-tab-item href="#generator" slot="activators">Generador</v-tab-item>
       <v-tab-item href="#tpls" slot="activators">Plantilla</v-tab-item>
@@ -31,6 +31,14 @@
   }
 </script>
 <style>
+  #generator, #tabs, #tables {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 77vh;
+  }
+  #generator .viewer{
+    flex: 1 1 75vh;
+  }
   #tabs .tabs__tabs {
     background-color: inherit;
   }

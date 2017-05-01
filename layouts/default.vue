@@ -20,7 +20,7 @@
       <v-content class="blue-grey lighten-4">
         <v-container fluid class="mt-5 pt-3 text-xs-center">
           <v-row>
-            <v-col xs12 md8 offset-md2>
+            <v-col xs12 md8 offset-md2 class="layout">
               <nuxt/>
             </v-col>
           </v-row>
@@ -65,5 +65,10 @@
 <style>
   a {
     text-decoration: none;
+  }
+  .layout {
+    display: flex;
+    flex-direction: column;
+    height: 89vh;
   }
 </style>

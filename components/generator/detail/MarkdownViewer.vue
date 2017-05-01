@@ -1,12 +1,10 @@
 <template>
-  <div class="text-box mt-2">
-    <v-card class="bluegray darken-1 text elevation-0">
-      <v-card-text>
+  <v-card class="text-box mt-2 bluegray darken-1">
+      <v-card-text class="md-container">
         <slot class="generate" name="button"></slot>
         <vue-markdown class=" text-xs-justify mt-2" :source="generatedText" @rendered="copyRawText"></vue-markdown>
       </v-card-text>
-    </v-card>
-  </div>
+  </v-card>
 </template>
 <script>
   import VueMarkdown from 'vue-markdown'
@@ -41,7 +39,8 @@
     flex-direction: column;
   }
 
-  .text {
-    flex-grow: 1;
+  .md-container {
+    flex: 1 1 100%;
+    overflow-y: auto!important;
   }
 </style>

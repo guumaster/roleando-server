@@ -1,12 +1,12 @@
 <template>
-  <div class="detail">
+  <div id="generator-detail">
     <card-header :generator="generator" @edit="editionMode = !editionMode"></card-header>
 
     <markdown-viewer v-if="!editionMode" :text="text" class="viewer" slot="generator">
       <generate-button slot="button" @generate="generateText"/>
     </markdown-viewer>
 
-    <tab-container  v-if="editionMode" :editionMode="editionMode" class="header">
+    <tab-container  v-if="editionMode" :editionMode="editionMode" class="tabbed-view">
 
       <markdown-viewer :text="text" class="viewer" slot="generator">
         <generate-button slot="button" @generate="generateText"/>
@@ -60,24 +60,16 @@
     }
   }
 </script>
-<style scoped>
-
-  .detail {
-    /*height: 100%;*/
-    height: 89vh;
+<style>
+  #generator-detail {
     display: flex;
     flex-direction: column;
   }
-
-  .header {
-    /*height: 75vh;*/
-    flex-grow: 1;
-    flex-basis: 100%;
+  .tabbed-view #generator .viewer{
+    flex: 1 1 70vh;
   }
-
-  .viewer {
-    /*height: 75vh;*/
-    overflow-y: auto;
-    flex-grow: 1;
+  .tabbed-view {
+    display: flex;
+    flex-direction: column;
   }
 </style>
