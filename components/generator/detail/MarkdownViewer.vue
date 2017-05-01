@@ -1,16 +1,13 @@
 <template>
-  <div class="text-box ">
-    <v-card class="bluegray darken-1 text">
-      <v-card-text class="">
+  <div class="text-box mt-2">
+    <v-card class="bluegray darken-1 text elevation-0">
+      <v-card-text>
         <slot class="generate" name="button"></slot>
-
-        <vue-markdown class=" text-xs-justify mt-2" :source="generatedText"
-                      @rendered="copyRawText"></vue-markdown>
+        <vue-markdown class=" text-xs-justify mt-2" :source="generatedText" @rendered="copyRawText"></vue-markdown>
       </v-card-text>
     </v-card>
   </div>
 </template>
-
 <script>
   import VueMarkdown from 'vue-markdown'
 
