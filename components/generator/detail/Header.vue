@@ -76,24 +76,22 @@
     props: ['editionMode'],
     components: {DeleteDialog, EditMetadata},
     computed: {
-      ...mapGetters('generator', ['canEdit']),
+      ...mapGetters('auth', ['isLogged']),
+      ...mapGetters('generator', ['canEdit', 'isNew']),
       ...mapState('generator', {
         generator: 'local'
       }),
+      userCanEdit () {
+        return this.editionMode && this.isLogged
+      },
       metaBtn () {
-        if (this.editionMode || !this.isLogged) return false
-
-        return this.isNew && this.canEdit
+        return this.userCanEdit && (this.isNew || this.canEdit)
       },
       saveBtn () {
-        if (this.editionMode || !this.isLogged) return false
-
-        return this.isNew && this.canEdit
+        return this.userCanEdit && (this.isNew || this.canEdit)
       },
       deleteBtn () {
-        if (this.editionMode || !this.isLogged) return false
-
-        return !this.isNew && this.canEdit
+        return this.userCanEdit && !this.isNew && this.canEdit
       }
     },
     data () {
