@@ -14,7 +14,7 @@
         <generate-button slot="button" @generate="generateText"/>
       </markdown-viewer>
 
-      <tab-container v-if="editionMode" :editionMode="editionMode" class="tabbed-view">
+      <tab-container v-if="editionMode" :editionMode="editionMode" :isNew="isNew" class="tabbed-view">
 
         <markdown-viewer :text="text" class="viewer" slot="generator">
           <generate-button slot="button" @generate="generateText"/>
@@ -38,14 +38,14 @@
   import TplViewer from './detail/TplViewer.vue'
   import TablesViewer from './detail/TablesViewer.vue'
   import GenerateButton from './detail/GenerateButton.vue'
-  import { mapState, mapActions, mapMutations } from 'vuex'
+  import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
   import rpgen from '@guumaster/rpgen'
 
   export default {
     data () {
       return {
         rawText: '',
-        editionMode: true
+        editionMode: false
       }
     },
     components: {
@@ -57,9 +57,11 @@
       GenerateButton
     },
     created () {
+      this.editionMode = this.isNew
       this.generateText()
     },
     computed: {
+      ...mapGetters('generator', ['canEdit', 'isNew']),
       ...mapState('generator', {
         generator: 'local'
       }),
@@ -76,8 +78,11 @@
       generateText () {
         this.rawText = this.engine.generate()
       },
-      deleteGenerator () {
-        this.remove(this.generator.id)
+      async deleteGenerator () {
+        await this.remove(this.generator.id)
+        this.$router.replace({
+          name: 'generadores'
+        })
       },
       async saveGenerator () {
         const saved = await this.save(this.generator)

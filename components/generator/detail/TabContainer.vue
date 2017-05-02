@@ -1,10 +1,11 @@
 <template>
   <div class="white">
-    <v-tabs id="tabs" v-model="active" grow scroll-bars @input="test">
+    <v-tabs id="tabs" v-model="active" grow scroll-bars>
 
       <v-tab-item href="#generator" slot="activators">Generador</v-tab-item>
       <v-tab-item href="#tpls" slot="activators">Plantilla</v-tab-item>
       <v-tab-item href="#tables" slot="activators">Tablas</v-tab-item>
+      <v-tab-item href="#help" slot="activators">Ayuda</v-tab-item>
 
       <v-tab-content id="generator" slot="content">
         <slot name="generator"></slot>
@@ -17,24 +18,26 @@
       <v-tab-content id="tables" slot="content">
         <slot name="tables"></slot>
       </v-tab-content>
+
+      <v-tab-content id="help" slot="content">
+        <help />
+      </v-tab-content>
     </v-tabs>
   </div>
 </template>
 <script>
+  import Help from './Help.vue'
   export default {
-    props: ['editionMode'],
-    data () {
-      return {active: 'tables'}
-    },
-    methods: {
-      test (e) {
-        console.log('click', e)
-      }
+    props: ['editionMode', 'isNew'],
+    components: {Help},
+    created () {
+      this.active = this.isNew ? 'tpls' : 'generator'
     }
+
   }
 </script>
 <style>
-  #generator, #tpls, #tables {
+  #generator, #tpls, #tables, #help {
     display: flex;
     flex-direction: column;
     flex: 1 1 77vh;

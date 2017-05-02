@@ -15,7 +15,7 @@
           {{generator.name}}
 
           <edit-metadata
-            v-if="editionMode"
+            v-if="metaBtn"
             :name="generator.name"
             :desc="generator.desc"
             @saveMetadata="saveMetadata">
@@ -32,22 +32,24 @@
         <div class="menubox">
 
           <delete-dialog
-            v-if="editionMode"
+            v-if="deleteBtn"
             title="Borrar generador?"
             description="Esta accion borrará el generador de forma permanente. No se puede deshacer."
+            width="50%"
             @confirm="$emit('delete')">
             <v-btn slot="activator" small icon class="red--text">
               <v-icon>delete_forever</v-icon>
             </v-btn>
           </delete-dialog>
 
-          <v-btn v-show="editionMode"
+          <v-btn v-show="saveBtn"
                  small icon @click.native="$emit('save')" class="blue--text">
             <v-icon>system_update_alt</v-icon>
           </v-btn>
 
           <v-btn red small icon @click.native="$emit('edit')">
-            <icon name="pencil"></icon>
+            <icon v-if="editionMode" name="eye-slash"></icon>
+            <icon v-if="!editionMode" name="eye"></icon>
           </v-btn>
         </div>
       </v-card-row>
@@ -68,15 +70,31 @@
 <script>
   import DeleteDialog from '../../common/DeleteDialog.vue'
   import EditMetadata from './EditMetadata.vue'
-  import {mapState} from 'vuex'
+  import { mapState, mapGetters } from 'vuex'
 
   export default {
     props: ['editionMode'],
     components: {DeleteDialog, EditMetadata},
     computed: {
+      ...mapGetters('generator', ['canEdit']),
       ...mapState('generator', {
         generator: 'local'
-      })
+      }),
+      metaBtn () {
+        if (this.editionMode || !this.isLogged) return false
+
+        return this.isNew && this.canEdit
+      },
+      saveBtn () {
+        if (this.editionMode || !this.isLogged) return false
+
+        return this.isNew && this.canEdit
+      },
+      deleteBtn () {
+        if (this.editionMode || !this.isLogged) return false
+
+        return !this.isNew && this.canEdit
+      }
     },
     data () {
       return {

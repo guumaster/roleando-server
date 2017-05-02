@@ -1,6 +1,5 @@
-import { pick } from 'lodash'
+import { pick, get } from 'lodash'
 import { generators as api } from '../modules/api'
-import { generator } from '@guumaster/rpgen'
 
 export const state = {
   current: {},
@@ -25,6 +24,26 @@ export const mutations = {
         ...pick(data, ['tpls', 'tables'])
       }
     }
+  }
+}
+export const getters = {
+  isNew (state) {
+    return !(state.current.id)
+  },
+  authorId (state) {
+    return get(state.current, 'author.id')
+  },
+  canEdit (state, getters, rootState, rootGetters) {
+    const isLogged = rootGetters['auth/isLogged']
+    const isAdmin = rootGetters['auth/isAdmin']
+
+    if (!isLogged) return false
+    if (isAdmin || getters.isNew) return true
+
+    const loggedUserId = rootGetters['auth/userId']
+    const authorId = getters['authorId']
+
+    return authorId === loggedUserId
   }
 }
 

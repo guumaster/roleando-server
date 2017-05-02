@@ -18,6 +18,12 @@ export const state = {
 export const getters = {
   isLogged (state) {
     return !!(state.user && state.user.token)
+  },
+  isAdmin (state) {
+    return get(state.user, 'profile.isAdmin', false)
+  },
+  userId (state) {
+    return get(state.user, 'profile.id', -1)
   }
 }
 export const mutations = {
