@@ -67,7 +67,8 @@ module.exports = {
     '~plugins/vueawesome.js',
     '~plugins/components.js',
     '~plugins/config.js',
-    {src: '~plugins/vuex-router-sync.js', ssr: false}
+    {src: '~plugins/vuex-router-sync.js', ssr: false},
+    {src: '~plugins/animate-number.js', ssr: false}
   ],
   css: [
     {src: join(__dirname, 'css/app.styl'), lang: 'styl'}

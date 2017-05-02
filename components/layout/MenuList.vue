@@ -26,7 +26,7 @@
     <v-list-item>
       <v-list-tile>
         <v-list-tile-action>
-          <icon name="user-circle" scale="1.2"></icon>
+          <icon name="user-circle" scale="1.15"></icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>Propios</v-list-tile-title>
@@ -37,7 +37,7 @@
     <v-divider light/>
     <v-subheader>Herramientas</v-subheader>
     <v-list-item>
-      <v-list-tile>
+      <v-list-tile :href="{name: 'rolodromo'}" router>
         <v-list-tile-action>
           <v-icon>widgets</v-icon>
         </v-list-tile-action>
@@ -53,10 +53,10 @@
     <v-list-item v-if="!isLogged">
       <v-list-tile :href="{name: 'auth-login'}" router>
         <v-list-tile-action>
-          <v-icon>widgets</v-icon>
+          <icon name="sign-in" scale="1.15"></icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Login</v-list-tile-title>
+          <v-list-tile-title>Entrar</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list-item>
@@ -64,10 +64,10 @@
     <v-list-item v-if="isLogged">
       <v-list-tile @click.native="logout">
         <v-list-tile-action>
-          <v-icon>widgets</v-icon>
+          <icon name="sign-out"  flip="horizontal" scale="1.15"></icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Logout</v-list-tile-title>
+          <v-list-tile-title>Salir</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list-item>
