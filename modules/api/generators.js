@@ -32,27 +32,13 @@ export const deleteGenerator = generatorId => HTTP
   .then(res => res.data)
 
 export const createGenerator = data => {
-  const generatorData = {
-    ...pick(data, ['name', 'desc']),
-    data: {
-      tpls: data.tpls,
-      tables: data.tables
-    }
-  }
   return HTTP
-    .post(`/tables`, generatorData)
+    .post(`/tables`, data)
     .then(res => res.data)
 }
 
 export const updateGenerator = (generatorId, data) => {
-  const generatorData = {
-    ...pick(data, ['name', 'desc']),
-    data: {
-      tpls: data.tpls,
-      tables: data.tables
-    }
-  }
   return HTTP
-    .put(`/table/${generatorId}`, generatorData)
+    .put(`/table/${generatorId}`, data)
     .then(res => res.data)
 }

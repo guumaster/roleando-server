@@ -1,21 +1,21 @@
 <template>
   <div class="text-box">
-    <textarea class="box">{{generator.data.tpls}}</textarea>
-    <!--<v-text-field-->
-    <!--name="input-tpls"-->
-    <!--class="box"-->
-    <!--focus-->
-    <!--label="Plantilla"-->
-    <!--:value="generator.data.tpls"-->
-    <!--multi-line-->
-    <!--&gt;</v-text-field>-->
+    <textarea class="box" @change="changed">{{tpls}}</textarea>
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
+
   export default {
-    props: ['generator'],
-    data () {
-      return {tpls: ''}
+    methods: {
+      changed (e) {
+        this.$emit('update', e.target.value)
+      }
+    },
+    computed: {
+      ...mapState('generator', {
+        tpls: state => state.local.data.tpls
+      })
     }
   }
 </script>

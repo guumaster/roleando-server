@@ -60,14 +60,28 @@
         </v-list-tile-content>
       </v-list-tile>
     </v-list-item>
+
+    <v-list-item v-if="isLogged">
+      <v-list-tile @click.native="logout">
+        <v-list-tile-action>
+          <v-icon>widgets</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Logout</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list-item>
   </v-list>
 </template>
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   export default {
     name: 'menu-list',
     computed: {
       ...mapGetters('auth', ['isLogged'])
+    },
+    methods: {
+      ...mapActions('auth', ['logout'])
     }
   }
 </script>

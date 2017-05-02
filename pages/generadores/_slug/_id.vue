@@ -1,26 +1,22 @@
 <template>
-  <generator-detail :generator="generator" />
+  <generator-detail/>
 </template>
 
 <script>
-  import axios from '~plugins/axios'
   import { GeneratorDetail } from '../../../components/generator'
 
   export default {
     components: {
       GeneratorDetail
     },
-    asyncData ({store, params, error}) {
-      return axios.get(`/api/generators/table/${params.id}`)
-        .then(res => res.data)
-        .then(generator => {
-          store.commit('generator/set', generator)
-          return { generator }
-        })
-        .catch(e => {
-          console.log('Error getting generator', e)
-          error({statusCode: 404, message: 'Generator not found'})
-        })
+    async asyncData ({store, params, error}) {
+      try {
+        const generator = await store.dispatch('generator/load', params.id)
+        return {generator}
+      } catch (e) {
+        console.log('Error getting generator', e)
+        error({statusCode: 404, message: 'Generator not found'})
+      }
     },
     head () {
       return {

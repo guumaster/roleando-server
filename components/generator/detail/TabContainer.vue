@@ -24,7 +24,7 @@
   export default {
     props: ['editionMode'],
     data () {
-      return {active: 'tpls'}
+      return {active: 'tables'}
     },
     methods: {
       test (e) {

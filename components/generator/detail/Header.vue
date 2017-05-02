@@ -13,16 +13,45 @@
       <v-card-row class="text-xs-left text--white title">
         <v-card-text>
           {{generator.name}}
+
+          <edit-metadata
+            v-if="editionMode"
+            :name="generator.name"
+            :desc="generator.desc"
+            @saveMetadata="saveMetadata">
+            <v-btn slot="activator" class="grey" small icon>
+              <icon name="pencil"></icon>
+            </v-btn>
+          </edit-metadata>
+
         </v-card-text>
       </v-card-row>
       <v-spacer></v-spacer>
+
       <v-card-row class="text-xs-right menubox-container">
         <div class="menubox">
+
+          <delete-dialog
+            v-if="editionMode"
+            title="Borrar generador?"
+            description="Esta accion borrará el generador de forma permanente. No se puede deshacer."
+            @confirm="$emit('delete')">
+            <v-btn slot="activator" small icon class="red--text">
+              <v-icon>delete_forever</v-icon>
+            </v-btn>
+          </delete-dialog>
+
+          <v-btn v-show="editionMode"
+                 small icon @click.native="$emit('save')" class="blue--text">
+            <v-icon>system_update_alt</v-icon>
+          </v-btn>
+
           <v-btn red small icon @click.native="$emit('edit')">
             <icon name="pencil"></icon>
           </v-btn>
         </div>
       </v-card-row>
+
     </v-card>
 
     <v-card v-show="expand">
@@ -37,11 +66,26 @@
   </div>
 </template>
 <script>
+  import DeleteDialog from '../../common/DeleteDialog.vue'
+  import EditMetadata from './EditMetadata.vue'
+  import {mapState} from 'vuex'
+
   export default {
-    props: ['generator'],
+    props: ['editionMode'],
+    components: {DeleteDialog, EditMetadata},
+    computed: {
+      ...mapState('generator', {
+        generator: 'local'
+      })
+    },
     data () {
       return {
         expand: false
+      }
+    },
+    methods: {
+      saveMetadata (payload) {
+        this.$emit('saveMetadata', payload)
       }
     }
   }
@@ -69,7 +113,6 @@
   }
 
   .title .card__text {
-    /*padding: 0;*/
     padding-left: 0.2em;
   }
 </style>

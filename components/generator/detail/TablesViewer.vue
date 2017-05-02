@@ -1,13 +1,21 @@
 <template>
   <div class="text-box">
-    <textarea class="box">{{generator.data.tables}}</textarea>
+    <textarea class="box" @change="changed">{{tables}}</textarea>
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
+
   export default {
-    props: ['generator'],
-    data () {
-      return {tpls: ''}
+    methods: {
+      changed (e) {
+        this.$emit('update', e.target.value)
+      }
+    },
+    computed: {
+      ...mapState('generator', {
+        tables: state => state.local.data.tables
+      })
     }
   }
 </script>
