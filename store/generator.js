@@ -49,14 +49,9 @@ export const getters = {
 
 export const actions = {
   async load ({commit}, id) {
-    try {
-      const data = await api.loadGenerator(id)
-      commit('set', data)
-      return data
-    } catch (e) {
-      console.log(e)
-      commit('toast/error', 'Error cargando datos', {root: true})
-    }
+    const data = await api.loadGenerator(id)
+    commit('set', data)
+    return data
   },
   async save ({state, commit}, payload) {
     let newData

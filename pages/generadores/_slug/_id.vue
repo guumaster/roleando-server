@@ -9,13 +9,13 @@
     components: {
       GeneratorDetail
     },
-    async asyncData ({store, params, error}) {
+    async asyncData ({req, store, params, error}) {
       try {
         const generator = await store.dispatch('generator/load', params.id)
         return {generator}
       } catch (e) {
-        console.log('Error getting generator', e)
-        error({statusCode: 404, message: 'Generator not found'})
+        console.log('Error getting generator', req.path, params.id, e.stack)
+        error({statusCode: 404, message: 'Generador no encontrado'})
       }
     },
     head () {

@@ -69,14 +69,25 @@
         return this.rawText
       },
       engine () {
-        return rpgen.generator.create(`${this.generator.data.tpls}\n\n${this.generator.data.tables}`)
+        try {
+          return rpgen.generator.create(`${this.generator.data.tpls}\n\n${this.generator.data.tables}`)
+        } catch (e) {
+          console.log(e)
+          this.error('Error cargando datos')
+        }
       }
     },
     methods: {
       ...mapMutations('generator', ['localData', 'localMeta']),
+      ...mapMutations('toast', ['success', 'error']),
       ...mapActions('generator', ['remove', 'save']),
       generateText () {
-        this.rawText = this.engine.generate()
+        try {
+          this.rawText = this.engine.generate()
+        } catch (e) {
+          console.log(e)
+          this.rawText = 'Error al generar contenido'
+        }
       },
       async deleteGenerator () {
         await this.remove(this.generator.id)
