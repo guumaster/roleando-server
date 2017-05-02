@@ -1,5 +1,6 @@
 <template>
   <div>
+    <generator-list-filters />
     <generator-list :list="list">
       <div slot="title">Generadores Aleatorios</div>
     </generator-list>
@@ -8,11 +9,12 @@
 
 <script>
   import { generators } from '../../modules/api'
-  import { GeneratorList } from '../../components/generator'
+  import { GeneratorList, GeneratorListFilters } from '../../components/generator'
 
   export default {
     components: {
-      GeneratorList
+      GeneratorList,
+      GeneratorListFilters
     },
     asyncData () {
       return generators.loadAll()

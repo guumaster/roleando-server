@@ -20,23 +20,26 @@
       <v-content class="blue-grey lighten-4">
         <v-container fluid class="mt-5 pt-3 text-xs-center">
           <v-row>
-            <v-col xs12 md8 offset-md2 >
+            <v-col xs12 md8 offset-md2>
               <nuxt/>
             </v-col>
           </v-row>
         </v-container>
       </v-content>
+      <toast/>
     </main>
   </v-app>
 </template>
 
 <script>
+  import Toast from '../components/layout/Toast.vue'
   import MenuList from '../components/layout/MenuList.vue'
   import { mapActions, mapGetters, mapState } from 'vuex'
 
   export default {
     components: {
-      MenuList
+      MenuList,
+      Toast
     },
     computed: {
       ...mapGetters('auth', ['isLogged']),
@@ -65,5 +68,12 @@
 <style>
   a {
     text-decoration: none;
+  }
+
+  .above-all {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 10;
   }
 </style>

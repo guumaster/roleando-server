@@ -49,9 +49,14 @@ export const getters = {
 
 export const actions = {
   async load ({commit}, id) {
-    const data = await api.loadGenerator(id)
-    commit('set', data)
-    return data
+    try {
+      const data = await api.loadGenerator(id)
+      commit('set', data)
+      return data
+    } catch (e) {
+      console.log(e)
+      commit('toast/error', 'Error cargando datos', {root: true})
+    }
   },
   async save ({state, commit}, payload) {
     let newData
@@ -62,18 +67,28 @@ export const actions = {
         ...pick(payload.data, ['tpls', 'tables'])
       }
     }
-    console.log('old', payload)
-    console.log('new', data)
 
-    if (!state.current.id) {
-      newData = await api.createGenerator(data)
-    } else {
-      newData = await api.updateGenerator(state.current.id, data)
+    try {
+      if (!state.current.id) {
+        newData = await api.createGenerator(data)
+      } else {
+        newData = await api.updateGenerator(state.current.id, data)
+      }
+      commit('set', newData)
+      commit('toast/success', 'Guardado con éxito', {root: true})
+      return newData
+    } catch (e) {
+      console.log(e)
+      commit('toast/error', 'Error al guardar', {root: true})
     }
-    commit('set', newData)
-    return newData
   },
-  remove ({state}) {
-    return api.deleteGenerator(state.current.id)
+  async remove ({state, commit}) {
+    try {
+      await api.deleteGenerator(state.current.id)
+      commit('toast/success', 'Eliminado con éxito', {root: true})
+    } catch (e) {
+      console.log(e)
+      commit('toast/error', 'Error al eliminar', {root: true})
+    }
   }
 }

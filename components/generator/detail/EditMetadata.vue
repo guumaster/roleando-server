@@ -19,7 +19,7 @@
       </v-card-row>
       <v-card-row actions>
         <v-btn class="secondary" @click.native="cancel">Cancelar</v-btn>
-        <v-btn class="red darken-1" @click.native="saveMeta">Guardar</v-btn>
+        <v-btn class="red darken-1" @click.native="saveMeta">Ok</v-btn>
       </v-card-row>
     </v-card>
   </v-dialog>
