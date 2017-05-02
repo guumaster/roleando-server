@@ -5,9 +5,13 @@
   "author": "guumaster",
   "license": "ISC",
   "private": true,
+  "main": "bin/server.js",
   "scripts": {
+    "dev": "nodemon -L bin/server",
+    "backup-heroku": "node bin/heroku_to_local",
     "precommit": "npm run lint",
     "lint": "eslint --ext .js,.vue .",
+    "lint:fix": "npm run lint -- --fix",
     "dev": "nodemon -w server --exec babel-node server/index.js",
     "clean": "rm -rf build .nuxt",
     "prebuild": "npm run clean",

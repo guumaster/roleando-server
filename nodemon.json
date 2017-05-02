@@ -1,16 +1,18 @@
 {
   "ignore": [
     ".git",
+    "build",
+    ".nuxt",
     "node_modules"
   ],
-  "verbose": true,
   "watch": [
-    "src/",
+    "src/server",
     "config/",
     ".env"
   ],
+  "verbose": true,
   "env": {
     "NODE_ENV": "development"
   },
-  "ext": "js json html css env"
+  "ext": "js json html css env vue"
 }

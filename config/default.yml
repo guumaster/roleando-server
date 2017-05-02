@@ -5,6 +5,8 @@ mailRecipient: 'guuweb@gmail.com'
 blogUrl: 'http://historiasdeunhobbit.wordpress.com'
 database:
   url: 'mongodb://localhost:27017/roleando'
+api:
+  baseUrl: 'http://localhost:8080'
 auth:
   token:
     secret: 'roleandovoy'
@@ -15,6 +17,7 @@ auth:
     expiresIn: '30d' # expires in 30 days
   adminUsers: '1'
 auth0:
+  callbackUrl: 'https://roleando.herokuapp.com/auth/callback'
   domain: 'localhost'
   clientId: '12345'
 sendgrid:
