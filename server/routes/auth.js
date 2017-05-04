@@ -26,7 +26,7 @@ router.post('/login', (req, res, next) => {
     .then(response => {
       res.send(response)
     })
-    .catch(err => next(err))
+    .catch(next)
 })
 
 router.post('/token/refresh', validateRefreshToken, (req, res, next) => {
@@ -41,7 +41,7 @@ router.post('/token/refresh', validateRefreshToken, (req, res, next) => {
     .then(response => {
       res.send(response)
     })
-    .catch(err => next(err))
+    .catch(next)
 })
 
 module.exports = router

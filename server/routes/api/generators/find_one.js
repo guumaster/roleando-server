@@ -11,6 +11,7 @@ module.exports = (req, res, next) => {
       if (!generator) {
         return next(errors.NotFoundError('Generator not found'))
       }
-      res.send(generator)
+      res.status(200).send(generator)
     })
+    .catch(next)
 }

@@ -13,6 +13,7 @@ const setFeatured = status => (req, res, next) => {
       }
       return res.sendStatus(204)
     })
+    .catch(next)
 }
 
 const setListed = status => (req, res, next) => {
@@ -23,6 +24,7 @@ const setListed = status => (req, res, next) => {
       }
       return res.sendStatus(204)
     })
+    .catch(next)
 }
 
 router.put('/featured/:id', setFeatured(true))

@@ -13,7 +13,7 @@ const {
   AUTH0_CALLBACK_URL,
   SENDGRID_USERNAME,
   SENDGRID_PASSWORD
-} = process.env
+} = process.env // eslint-disable-line no-process-env
 
 module.exports = {
   name: 'Roleando',

@@ -7,4 +7,5 @@ module.exports = (req, res, next) => {
     .then(list => {
       res.send(list)
     })
+    .catch(next)
 }

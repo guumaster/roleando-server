@@ -4,7 +4,6 @@ const shortid = require('shortid')
 const slug = require('slug')
 const merge = require('lodash/merge')
 const clone = require('lodash/clone')
-const has = require('lodash/has')
 const map = require('lodash/map')
 const partialRight = require('lodash/partialRight')
 const unset = require('lodash/unset')
@@ -35,7 +34,23 @@ const listOpts = {
   sort: {createdAt: -1}
 }
 
-const findAll = () => generators.find({listed: true, deleted: dontExists}, listOpts).then(prepareList)
+const findAll = () => generators.find({
+  listed: true,
+  deleted: dontExists
+}, listOpts).then(prepareList)
+
+const findOwn = (userId) => generators.find({
+  'author.id': userId,
+  listed: true,
+  deleted: dontExists
+}, listOpts).then(prepareList)
+
+const findLikes = (userId) => generators.find({
+  likes: userId,
+  listed: true,
+  deleted: dontExists
+}, listOpts).then(prepareList)
+
 const findFeatured = () => generators.find({
   listed: true,
   featured: true,
@@ -106,14 +121,32 @@ const setListed = (id, listed) => {
     })
 }
 
+const addLike = (id, userId) => {
+  return generators
+    .update({id}, {
+      $addToSet: {likes: userId}
+    })
+}
+
+const removeLike = (id, userId) => {
+  return generators
+    .update({id}, {
+      $pull: {likes: userId}
+    })
+}
+
 module.exports = {
   findById,
   findAll,
+  findOwn,
+  findLikes,
   findFeatured,
   save,
   fork,
   remove,
   checkOwner,
   setFeatured,
-  setListed
+  setListed,
+  addLike,
+  removeLike
 }

@@ -15,6 +15,7 @@ router.get('/rg/:id', (req, res, next) => {
 
       return res.redirect(301, generator.link)
     })
+    .catch(next)
 })
 
 module.exports = router
