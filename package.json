@@ -7,7 +7,6 @@
   "private": true,
   "main": "bin/server.js",
   "scripts": {
-    "dev": "nodemon -L bin/server",
     "backup-heroku": "node bin/heroku_to_local",
     "precommit": "npm run lint",
     "lint": "eslint --ext .js,.vue .",
@@ -26,7 +25,6 @@
     "auth0-js": "8.6.0",
     "axios": "0.16.1",
     "body-parser": "1.17.1",
-    "config": "1.25.1",
     "cors": "2.8.3",
     "cross-env": "4.0.0",
     "dotenv": "4.0.0",
@@ -72,6 +70,8 @@
     "eslint-plugin-node": "4.2.2",
     "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-standard": "3.0.1",
+    "mongodb-backup": "1.6.9",
+    "mongodb-restore": "1.6.2",
     "nodemon": "1.11.0",
     "stylus": "0.54.5",
     "stylus-loader": "3.0.1"
