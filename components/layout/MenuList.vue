@@ -24,7 +24,7 @@
       </v-list-tile>
     </v-list-item>
     <v-list-item>
-      <v-list-tile>
+      <v-list-tile :href="{name: 'generadores-propios'}" router>
         <v-list-tile-action>
           <icon name="user-circle" scale="1.15"></icon>
         </v-list-tile-action>

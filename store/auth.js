@@ -1,6 +1,6 @@
 import { get } from 'lodash'
 
-import { auth, generators } from '../modules/api'
+import { auth, generators, me } from '../modules/api'
 
 import * as storage from '../modules/storage/auth'
 
@@ -47,6 +47,7 @@ export const actions = {
   async loadUserInfo ({commit}) {
     const userInfo = await storage.getUserInfo()
     generators.setAuthToken(get(userInfo, 'token.accessToken'))
+    me.setAuthToken(get(userInfo, 'token.accessToken'))
     commit('setUserInfo', userInfo)
   }
 }

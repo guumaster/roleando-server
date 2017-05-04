@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { unset, pick } from 'lodash'
+import { unset } from 'lodash'
 
 import config from '../config'
 
