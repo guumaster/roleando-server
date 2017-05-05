@@ -1,14 +1,12 @@
 <template>
   <div>
-    <v-list-item>
+    <v-list-item ripple dense>
+      <left-ribbon v-if="generator.featured && !featured">
+        <v-icon slot="content" class="white--text">star</v-icon>
+      </left-ribbon>
       <v-list-tile avatar :href="link" router>
 
-        <v-list-tile-action v-if="!featured">
-          <v-icon v-if="generator.featured" class="pink--text">star</v-icon>
-          <v-icon v-else class="grey--text">star</v-icon>
-        </v-list-tile-action>
-
-        <v-list-tile-content>
+        <v-list-tile-content :class="{ 'pl-3': !featured}">
           <v-list-tile-title v-text="generator.name"/>
           <v-list-tile-sub-title v-text="generator.desc"/>
         </v-list-tile-content>
