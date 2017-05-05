@@ -1,5 +1,5 @@
-import { pick, get } from 'lodash'
-import { generators as api } from '../modules/api'
+import {pick, pickBy, get} from 'lodash'
+import {generators as api} from '../modules/api'
 
 export const state = {
   current: {},
@@ -21,7 +21,25 @@ export const mutations = {
       ...state.local,
       data: {
         ...state.local.data,
-        ...pick(data, ['tpls', 'tables'])
+        ...pick(data, ['tpls', 'tables', 'alias'])
+      }
+    }
+  },
+  addExternal (state, payload) {
+    state.local.data = {
+      ...state.local.data,
+      alias: {
+        ...state.local.data.alias,
+        [payload.key]: payload.value
+      }
+    }
+  },
+  removeExternal (state, key) {
+    state.local = {
+      ...state.local,
+      data: {
+        ...state.local.data,
+        alias: pickBy(state.local.data.alias, (v, k) => k !== key)
       }
     }
   }
@@ -59,7 +77,7 @@ export const actions = {
     const data = {
       ...pick(payload, ['name', 'desc']),
       data: {
-        ...pick(payload.data, ['tpls', 'tables'])
+        ...pick(payload.data, ['tpls', 'tables', 'alias'])
       }
     }
 

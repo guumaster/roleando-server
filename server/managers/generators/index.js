@@ -11,7 +11,7 @@ const unset = require('lodash/unset')
 const validate = require('./validator')
 const link = require('./link')
 const db = require('../db')
-const addHelperTables = require('./aggregate_subtables')
+const addChildrenTables = require('./add_children_tables')
 
 const DEFAULT_DATA = {
   listed: true,
@@ -39,6 +39,13 @@ const findAll = () => generators.find({
   deleted: dontExists
 }, listOpts).then(prepareList)
 
+const findNames = () => generators.find({
+  deleted: dontExists
+}, {
+  fields: {name: 1, desc: 1, id: 1},
+  sort: {slug: 1}
+}).then(prepareList)
+
 const findOwn = (userId) => generators.find({
   'author.id': userId,
   listed: true,
@@ -60,7 +67,7 @@ const findFeatured = () => generators.find({
 const findById = id => {
   return generators
     .findOne({id, deleted: dontExists})
-    .then(addHelperTables)
+    .then(addChildrenTables)
     .then(prepare)
 }
 
@@ -78,7 +85,11 @@ const save = (inputId, inputData) => validate(inputData).then(() => {
       id,
       deleted: dontExists
     }, {
-      $set: data
+      $set: {
+        tpls: data.tpls,
+        tables: data.tables,
+        alias: data.alias
+      }
     }, {upsert: true})
     .then(prepare)
 })
@@ -137,6 +148,7 @@ const removeLike = (id, userId) => {
 
 module.exports = {
   findById,
+  findNames,
   findAll,
   findOwn,
   findLikes,

@@ -8,6 +8,7 @@ const validateToken = require('../../../middlewares/validate_token')
 const onlyAdmin = require('../../../middlewares/only_admin')
 
 const listAll = require('./list_all')
+const listNames = require('./list_names')
 const listFeatured = require('./list_featured')
 const listLiked = require('./list_liked')
 const addLike = require('./likes/add')
@@ -22,7 +23,8 @@ const router = express.Router()
 const useCors = cors()
 const mandatoryToken = () => validateToken({required: true})
 
-router.get('/tables', useCors, listAll)
+router.get('/tables', useCors, validateToken(), listAll)
+router.get('/tables/names', useCors, validateToken(), listNames)
 router.get('/tables/featured', useCors, validateToken(), listFeatured)
 router.get('/tables/likes', useCors, mandatoryToken(), listLiked)
 

@@ -19,6 +19,10 @@ export const loadAll = () => HTTP
   .get(`/tables`)
   .then(res => res.data)
 
+export const loadNames = () => HTTP
+  .get(`/tables/names`)
+  .then(res => res.data)
+
 export const loadFeatured = () => HTTP
   .get(`/tables/featured`)
   .then(res => res.data)

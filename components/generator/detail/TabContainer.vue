@@ -5,6 +5,7 @@
       <v-tab-item href="#generator" slot="activators">Generador</v-tab-item>
       <v-tab-item href="#tpls" slot="activators">Plantilla</v-tab-item>
       <v-tab-item href="#tables" slot="activators">Tablas</v-tab-item>
+      <v-tab-item href="#external" slot="activators">Externas</v-tab-item>
       <v-tab-item href="#help" slot="activators">Ayuda</v-tab-item>
 
       <v-tab-content id="generator" slot="content">
@@ -17,6 +18,10 @@
 
       <v-tab-content id="tables" slot="content">
         <slot name="tables"></slot>
+      </v-tab-content>
+
+      <v-tab-content id="external" slot="content">
+        <slot name="external"></slot>
       </v-tab-content>
 
       <v-tab-content id="help" slot="content">
@@ -37,7 +42,7 @@
   }
 </script>
 <style>
-  #generator, #tpls, #tables, #help {
+  #generator, #tpls, #tables, #help, #external {
     display: flex;
     flex-direction: column;
     flex: 1 1 77vh;

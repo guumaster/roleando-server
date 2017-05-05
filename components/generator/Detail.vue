@@ -27,6 +27,12 @@
         <div slot="tables" class="viewer">
           <tables-viewer @update="updateTables"></tables-viewer>
         </div>
+        <div slot="external" class="viewer">
+          <external-viewer
+            @remove="removeTable"
+            @add="addTable"
+          ></external-viewer>
+        </div>
       </tab-container>
     </div>
   </div>
@@ -37,6 +43,7 @@
   import TabContainer from './detail/TabContainer.vue'
   import TplViewer from './detail/TplViewer.vue'
   import TablesViewer from './detail/TablesViewer.vue'
+  import ExternalViewer from './detail/ExternalViewer.vue'
   import GenerateButton from './detail/GenerateButton.vue'
   import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
   import rpgen from '@guumaster/rpgen'
@@ -54,6 +61,7 @@
       MarkdownViewer,
       TplViewer,
       TablesViewer,
+      ExternalViewer,
       GenerateButton
     },
     created () {
@@ -70,7 +78,16 @@
       },
       engine () {
         try {
-          return rpgen.generator.create(`${this.generator.data.tpls}\n\n${this.generator.data.tables}`)
+          const { tpls, tables } = this.generator.data
+          const childrenNames = Object.keys(this.generator.children)
+          let children = ''
+          if (childrenNames.length) {
+            children = childrenNames.reduce((str, key) => {
+              const data = this.generator.children[key]
+              return `${str}\n\n${data.tables}`
+            }, '')
+          }
+          return rpgen.generator.create(`${tpls}\n\n${tables}\n\n${children}`)
         } catch (e) {
           console.log(e)
           this.error('Error cargando datos')
@@ -78,7 +95,7 @@
       }
     },
     methods: {
-      ...mapMutations('generator', ['localData', 'localMeta']),
+      ...mapMutations('generator', ['localData', 'localMeta', 'removeExternal', 'addExternal']),
       ...mapMutations('toast', ['success', 'error']),
       ...mapActions('generator', ['remove', 'save']),
       generateText () {
@@ -111,6 +128,14 @@
       },
       updateTpls (tpls) {
         this.localData({tpls})
+        this.generateText()
+      },
+      removeTable (key) {
+        this.removeExternal(key)
+        this.generateText()
+      },
+      addTable (payload) {
+        this.addExternal(payload)
         this.generateText()
       }
     }
