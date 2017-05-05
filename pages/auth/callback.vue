@@ -28,7 +28,7 @@
       })
 
       lock.on('authenticated', async (authResult) => {
-        console.log('Auth0 token: ', authResult.idToken)
+        console.log('Auth0 token: ', authResult.accessToken)
         this.login(authResult)
           .then(() => {
             console.log('Login complete. Redirecting...')
