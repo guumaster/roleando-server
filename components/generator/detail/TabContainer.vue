@@ -6,7 +6,6 @@
       <v-tab-item href="#tpls" slot="activators">Plantilla</v-tab-item>
       <v-tab-item href="#tables" slot="activators">Tablas</v-tab-item>
       <v-tab-item href="#external" slot="activators">Externas</v-tab-item>
-      <v-tab-item href="#help" slot="activators">Ayuda</v-tab-item>
 
       <v-tab-content id="generator" slot="content">
         <slot name="generator"></slot>
@@ -24,17 +23,12 @@
         <slot name="external"></slot>
       </v-tab-content>
 
-      <v-tab-content id="help" slot="content">
-        <help />
-      </v-tab-content>
     </v-tabs>
   </div>
 </template>
 <script>
-  import Help from './Help.vue'
   export default {
     props: ['editionMode', 'isNew'],
-    components: {Help},
     created () {
       this.active = this.isNew ? 'tpls' : 'generator'
     }

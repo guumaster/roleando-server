@@ -3,16 +3,13 @@
       <v-card-text class="md-container">
         <slot class="generate" name="button"></slot>
         <div class="mt-2 ql-editor" v-html="generatedText"></div>
-        <!--<vue-markdown class=" text-xs-justify mt-2" :source="generatedText" @rendered="copyRawText"></vue-markdown>-->
       </v-card-text>
   </v-card>
 </template>
 <script>
-  import VueMarkdown from 'vue-markdown'
 
   export default {
     props: ['text'],
-    components: {VueMarkdown},
     data () {
       return {
         rawText: ''
@@ -20,7 +17,7 @@
     },
     computed: {
       generatedText () {
-        return this.text || '\n\n\n#### No hay plantilla'
+        return this.text || '\n\n\nNo hay plantilla'
       }
     },
     methods: {

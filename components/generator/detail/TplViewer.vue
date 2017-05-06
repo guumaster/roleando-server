@@ -1,7 +1,8 @@
 <template>
   <div class="text-box">
     <div class="box">
-      <quill-editor class="tpl-container"
+      <quill-editor
+        class="tpl-container"
         ref="quillEditor"
         :content="rawTpls"
         :options="editorOption"
@@ -21,18 +22,38 @@
             <option selected></option>
             <option value="large"></option>
           </select>
-         <!-- <select class="ql-header">
-            <option value="2"></option>
-            <option value="3"></option>
-            <option selected></option>
-          </select>-->
+          <!-- <select class="ql-header">
+             <option value="2"></option>
+             <option value="3"></option>
+             <option selected></option>
+           </select>-->
           <button class="ql-link"></button>
-          <button  @click="addHr">
+          <button @click="addHr">
             <icon name="minus"></icon>
           </button>
           <button class="ql-clean"></button>
+
+          <v-dialog fullscreen v-model="helpDialog">
+            <button slot="activator">
+              <icon name="question"></icon>
+            </button>
+            <v-card>
+              <v-card-title>Ayuda</v-card-title>
+              <v-divider></v-divider>
+              <v-card-row>
+                <help/>
+              </v-card-row>
+              <v-divider></v-divider>
+              <v-card-row actions>
+                <v-btn class="red darken-1" @click.native="helpDialog=false">
+                  <icon name="check"></icon>
+                </v-btn>
+              </v-card-row>
+            </v-card>
+          </v-dialog>
+
           <v-dialog v-model="tableSelector" scrollable persistent width="90vw">
-            <button slot="activator" @click="saveRange">
+            <button slot="activator" @click="showTableSelector">
               <icon name="table"></icon>
             </button>
             <v-card>
@@ -45,12 +66,17 @@
                            :label="item"
                            :value="item"
                            :key="i"
-                  >{{item}}</v-radio>
+                  >{{item}}
+                  </v-radio>
                 </v-card-text>
               </v-card-row>
               <v-card-row actions>
-                <v-btn class="secondary" small @click.native="tableSelector=false"><icon name="times"></icon></v-btn>
-                <v-btn class="red darken-1" @click.native="insertTable"><icon name="check"></icon></v-btn>
+                <v-btn class="secondary" small @click.native="tableSelector=false">
+                  <icon name="times"></icon>
+                </v-btn>
+                <v-btn class="red darken-1" @click.native="insertTable">
+                  <icon name="check"></icon>
+                </v-btn>
               </v-card-row>
             </v-card>
           </v-dialog>
@@ -61,15 +87,18 @@
   </div>
 </template>
 <script>
+  import Help from './Help.vue'
   import {mapState} from 'vuex'
 
   export default {
+    components: {Help},
     data () {
       return {
         range: null,
         rawTpls: '',
         selectedTable: null,
         tableSelector: false,
+        helpDialog: false,
         editorOption: {
           modules: {
             toolbar: '#toolbar',
@@ -83,7 +112,7 @@
       }
     },
     methods: {
-      saveRange () {
+      showTableSelector () {
         this.range = this.editor.getSelection()
       },
       addHr () {
@@ -132,7 +161,6 @@
   }
 
   .box {
-    /*background-color: #CCC !important;*/
     flex: 1 1 100% !important; /* consume available width */
     overflow-y: auto !important;
   }

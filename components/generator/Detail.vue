@@ -10,15 +10,15 @@
         @save="saveGenerator"
       ></card-header>
 
-      <markdown-viewer v-if="!editionMode" :text="text" class="viewer" slot="generator">
+      <text-viewer v-if="!editionMode" :text="text" class="viewer" slot="generator">
         <generate-button slot="button" @generate="generateText"/>
-      </markdown-viewer>
+      </text-viewer>
 
       <tab-container v-if="editionMode" :editionMode="editionMode" :isNew="isNew" class="tabbed-view">
 
-        <markdown-viewer :text="text" class="viewer" slot="generator">
+        <text-viewer :text="text" class="viewer" slot="generator">
           <generate-button slot="button" @generate="generateText"/>
-        </markdown-viewer>
+        </text-viewer>
 
         <div slot="tpls" class="viewer">
           <tpl-viewer @update="updateTpls"></tpl-viewer>
@@ -38,7 +38,7 @@
   </div>
 </template>
 <script>
-  import MarkdownViewer from './detail/MarkdownViewer.vue'
+  import TextViewer from './detail/TextViewer.vue'
   import Header from './detail/Header.vue'
   import TabContainer from './detail/TabContainer.vue'
   import TplViewer from './detail/TplViewer.vue'
@@ -58,7 +58,7 @@
     components: {
       'card-header': Header,
       TabContainer,
-      MarkdownViewer,
+      TextViewer,
       TplViewer,
       TablesViewer,
       ExternalViewer,

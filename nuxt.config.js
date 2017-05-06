@@ -81,7 +81,7 @@ module.exports = {
       '@guumaster/rpgen',
       'vue-awesome',
       'vuetify',
-      'vue-markdown'
+      'vue-quill-editor'
     ]
   }
 }
