@@ -74,7 +74,7 @@ const findById = id => {
 const save = (inputId, inputData) => validate(inputData).then(() => {
   const id = inputId || shortid.generate()
 
-  const data = merge({}, DEFAULT_DATA, inputData)
+  const data = inputId ? inputData : merge({}, DEFAULT_DATA, inputData)
 
   const time = inputId ? 'updatedAt' : 'createdAt'
   data[time] = new Date()
