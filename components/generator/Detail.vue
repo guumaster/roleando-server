@@ -134,8 +134,7 @@
         this.removeExternal(key)
         this.generateText()
       },
-      addTable (payload) {
-        this.addExternal(payload)
+      addTable () {
         this.generateText()
       }
     }

@@ -3,9 +3,13 @@ import {generators as api} from '../modules/api'
 
 export const state = {
   current: {},
-  local: {}
+  local: {},
+  names: []
 }
 export const mutations = {
+  setNames (state, names) {
+    state.names = names
+  },
   set (state, newGenerator) {
     state.current = newGenerator
     state.local = newGenerator
@@ -30,13 +34,18 @@ export const mutations = {
       ...state.local.data,
       alias: {
         ...state.local.data.alias,
-        [payload.key]: payload.value
+        [payload.alias]: payload.id
       }
+    }
+    state.local.children = {
+      ...state.local.children,
+      [payload.alias]: payload.content
     }
   },
   removeExternal (state, key) {
     state.local = {
       ...state.local,
+      children: pickBy(state.local.children, (v, k) => k !== key),
       data: {
         ...state.local.data,
         alias: pickBy(state.local.data.alias, (v, k) => k !== key)
@@ -87,7 +96,10 @@ export const actions = {
       } else {
         newData = await api.updateGenerator(state.current.id, data)
       }
-      commit('set', newData)
+      commit('set', {
+        ...state.local,
+        ...newData
+      })
       commit('toast/success', 'Guardado con éxito', {root: true})
       return newData
     } catch (e) {
@@ -103,5 +115,22 @@ export const actions = {
       console.log(e)
       commit('toast/error', 'Error al eliminar', {root: true})
     }
+  },
+  async loadNames ({ state, commit }) {
+    if (state.names.length) {
+      return state.names
+    }
+    const names = await api.loadNames()
+    commit('setNames', names)
+    return names
+  },
+  async loadExternal ({commit}, payload) {
+    const external = await api.loadGenerator(payload.id)
+    commit('addExternal', {
+      alias: payload.name,
+      id: payload.id,
+      content: { ...pick(external.data, ['tpls', 'tables']) }
+    })
+    return external
   }
 }

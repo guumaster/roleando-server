@@ -85,11 +85,7 @@ const save = (inputId, inputData) => validate(inputData).then(() => {
       id,
       deleted: dontExists
     }, {
-      $set: {
-        tpls: data.tpls,
-        tables: data.tables,
-        alias: data.alias
-      }
+      $set: data
     }, {upsert: true})
     .then(prepare)
 })
