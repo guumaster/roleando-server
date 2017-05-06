@@ -1,10 +1,25 @@
 import {pick, pickBy, get} from 'lodash'
 import {generators as api} from '../modules/api'
 
+const getTableNames = (tables) => `\n${tables}`.match(/\n;([^\n])+\n/gm).map(name => name.replace(/;/, '').trim())
+
+const extractTableNames = (generator) => {
+  let names = getTableNames(generator.data.tables)
+  const scopes = Object.keys(generator.children)
+
+  names = scopes.reduce((all, scope) => {
+    return all
+      .concat(getTableNames(generator.children[scope].tables)
+      .map(name => `${scope}.${name}`))
+  }, names)
+  return names
+}
+
 export const state = {
   current: {},
   local: {},
-  names: []
+  names: [],
+  tableNames: []
 }
 export const mutations = {
   setNames (state, names) {
@@ -28,6 +43,7 @@ export const mutations = {
         ...pick(data, ['tpls', 'tables', 'alias'])
       }
     }
+    state.tableNames = extractTableNames(state.local)
   },
   addExternal (state, payload) {
     state.local.data = {
@@ -116,7 +132,7 @@ export const actions = {
       commit('toast/error', 'Error al eliminar', {root: true})
     }
   },
-  async loadNames ({ state, commit }) {
+  async loadNames ({state, commit}) {
     if (state.names.length) {
       return state.names
     }
@@ -129,7 +145,7 @@ export const actions = {
     commit('addExternal', {
       alias: payload.name,
       id: payload.id,
-      content: { ...pick(external.data, ['tpls', 'tables']) }
+      content: {...pick(external.data, ['tpls', 'tables'])}
     })
     return external
   }
