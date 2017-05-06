@@ -4,6 +4,9 @@ const config = require('./config/browser')
 const dev = !(process.env.NODE_ENV === 'production')
 const label = dev ? '(local) ' : ''
 
+const TITLE = 'Roleando WebApp'
+const DESC = 'Generadores aleatorios y herramientas para juegos de rol'
+
 module.exports = {
   dev,
   env: config,
@@ -15,7 +18,16 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: 'Roleando!'}
+      {hid: 'description', name: 'description', content: DESC},
+      // Twitter
+      { name: 'twitter:title', content: TITLE },
+      // Google+ / Schema.org
+      { itemprop: 'name', content: TITLE },
+      { itemprop: 'description', content: DESC },
+      // Facebook / Open Graph
+      { property: 'og:title', content: TITLE },
+      { property: 'og:description', content: DESC },
+      { property: 'og:image', content: 'https://roleando.herokuapp.com/images/icons/icon-512x512.png' }
     ],
     script: [
       {src: 'https://cdn.auth0.com/js/lock/10.14/lock.min.js'}

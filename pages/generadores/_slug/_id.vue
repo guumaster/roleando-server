@@ -19,8 +19,20 @@
       }
     },
     head () {
+      const TITLE = `Generador: ${this.generator.name}`
+      const DESC = this.generator.desc
       return {
-        title: `Generador: ${this.generator.name}`
+        title: TITLE,
+        meta: [
+          // Twitter
+          { name: 'twitter:title', content: TITLE },
+          // Google+ / Schema.org
+          { itemprop: 'name', content: TITLE },
+          { itemprop: 'description', content: DESC },
+          // Facebook / Open Graph
+          { property: 'og:title', content: TITLE },
+          { property: 'og:description', content: DESC },
+        ]
       }
     }
   }
