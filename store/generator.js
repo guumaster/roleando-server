@@ -92,9 +92,9 @@ export const getters = {
 
 export const actions = {
   async load ({commit}, id) {
-    const data = await api.loadGenerator(id)
-    commit('set', data)
-    return data
+    const generator = await api.loadGenerator(id)
+    commit('set', generator)
+    return generator
   },
   async save ({state, commit}, payload) {
     let newData

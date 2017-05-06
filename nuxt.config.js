@@ -68,7 +68,8 @@ module.exports = {
     '~plugins/components.js',
     '~plugins/config.js',
     {src: '~plugins/vuex-router-sync.js', ssr: false},
-    {src: '~plugins/animate-number.js', ssr: false}
+    {src: '~plugins/animate-number.js', ssr: false},
+    {src: '~plugins/quill-editor.js', ssr: false}
   ],
   css: [
     {src: join(__dirname, 'css/app.styl'), lang: 'styl'}

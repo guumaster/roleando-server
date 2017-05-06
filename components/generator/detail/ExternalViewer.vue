@@ -1,60 +1,62 @@
 <template>
   <div class="text-box">
-    <v-list>
-      <v-expansion-panel expand>
-        <v-expansion-panel-content  v-model="open">
-          <div slot="header" >Tabla nueva</div>
-          <v-card>
-            <v-card-row>
-              <v-card-title>
-                <v-text-field
-                  v-model="newTableName"
-                name="new-table-name"
-                label="Alias"
-              ></v-text-field>
-              </v-card-title>
-            </v-card-row>
-            <v-card-row>
-            <v-card-text >
-              <v-select
-                label="Generadores"
-                :items="tables"
-                v-model="newTable"
-                item-text="name"
-                item-value="id"
-                light
-                max-height="auto"
-                autocomplete
-              >
-              </v-select>
-            </v-card-text>
-            </v-card-row>
-            <v-card-row actions>
-              <v-btn class="secondary" @click.native="cancelAdd">Cancelar</v-btn>
-              <v-btn class="red darken-1" @click.native="add">Ok</v-btn>
-            </v-card-row>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <template v-for="(value, key) in alias">
-        <v-list-item :key="value">
-          <v-list-tile avatar>
+    <div class="box">
+      <v-list>
+        <v-expansion-panel expand>
+          <v-expansion-panel-content v-model="open">
+            <div slot="header">Tabla nueva</div>
+            <v-card>
+              <v-card-row>
+                <v-card-title>
+                  <v-text-field
+                    v-model="newTableName"
+                    name="new-table-name"
+                    label="Alias"
+                  ></v-text-field>
+                </v-card-title>
+              </v-card-row>
+              <v-card-row>
+                <v-card-text>
+                  <v-select
+                    label="Generadores"
+                    :items="tables"
+                    v-model="newTable"
+                    item-text="name"
+                    item-value="id"
+                    light
+                    max-height="auto"
+                    autocomplete
+                  >
+                  </v-select>
+                </v-card-text>
+              </v-card-row>
+              <v-card-row actions>
+                <v-btn class="secondary" @click.native="cancelAdd">Cancelar</v-btn>
+                <v-btn class="red darken-1" @click.native="add">Ok</v-btn>
+              </v-card-row>
+            </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <template v-for="(value, key) in alias">
+          <v-list-item :key="value">
+            <v-list-tile avatar>
 
-            <v-list-tile-content>
-              <v-list-tile-title class="display-3"> {{key}}</v-list-tile-title>
-              <v-list-tile-sub-title>Referencia: {{ value }}</v-list-tile-sub-title>
-            </v-list-tile-content>
+              <v-list-tile-content>
+                <v-list-tile-title class="display-3"> {{key}}</v-list-tile-title>
+                <v-list-tile-sub-title>Referencia: {{ value }}</v-list-tile-sub-title>
+              </v-list-tile-content>
 
-            <v-list-tile-action>
-              <v-btn icon ripple @click.native="remove(key)">
-                <v-icon class="red--text text--lighten-1">clear</v-icon>
-              </v-btn>
-            </v-list-tile-action>
+              <v-list-tile-action>
+                <v-btn icon ripple @click.native="remove(key)">
+                  <v-icon class="red--text text--lighten-1">clear</v-icon>
+                </v-btn>
+              </v-list-tile-action>
 
-          </v-list-tile>
-        </v-list-item>
-      </template>
-    </v-list>
+            </v-list-tile>
+          </v-list-item>
+        </template>
+      </v-list>
+    </div>
   </div>
 </template>
 <script>
@@ -102,3 +104,18 @@
     }
   }
 </script>
+<style scoped>
+
+  .text-box {
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+  }
+
+  .box {
+    /*background-color: #CCC !important;*/
+    flex: 1 1 100% !important; /* consume available width */
+    overflow-y: auto !important;
+  }
+</style>

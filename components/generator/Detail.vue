@@ -89,7 +89,7 @@
           }
           return rpgen.generator.create(`${tpls}\n\n${tables}\n\n${children}`)
         } catch (e) {
-          console.log(e)
+          console.log('Generator Detail:', e)
           this.error('Error cargando datos')
         }
       }
@@ -159,6 +159,10 @@
   }
 
   .tabbed-view #generator .viewer {
+    flex: 1 1 68vh;
+  }
+
+  .tabbed-view #external .viewer {
     flex: 1 1 68vh;
   }
 

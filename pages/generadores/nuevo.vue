@@ -13,6 +13,7 @@
       const emptyGenerator = {
         name: 'Nuevo generador',
         desc: 'Descripción',
+        children: {},
         data: {
           tpls: ';@tpl|main\n\n[algo]',
           tables: ';algo\nlinea 1\nlinea 2\nlinea 3'

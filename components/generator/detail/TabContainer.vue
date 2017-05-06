@@ -55,6 +55,11 @@
   #tpls .viewer {
     flex: 1 1 75vh;
   }
+
+  #external .viewer {
+    flex: 1 1 75vh;
+  }
+
   #tabs .tabs__tabs {
     background-color: inherit;
   }

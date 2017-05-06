@@ -2,7 +2,8 @@
   <v-card class="text-box mt-2 bluegray darken-1">
       <v-card-text class="md-container">
         <slot class="generate" name="button"></slot>
-        <vue-markdown class=" text-xs-justify mt-2" :source="generatedText" @rendered="copyRawText"></vue-markdown>
+        <div class="mt-2 ql-editor" v-html="generatedText"></div>
+        <!--<vue-markdown class=" text-xs-justify mt-2" :source="generatedText" @rendered="copyRawText"></vue-markdown>-->
       </v-card-text>
   </v-card>
 </template>
