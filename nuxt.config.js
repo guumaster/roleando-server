@@ -18,16 +18,16 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: DESC},
+      {name: 'description', content: DESC, id: 'desc'},
       // Twitter
-      { name: 'twitter:title', content: TITLE },
+      { name: 'twitter:title', content: TITLE, id: 'twd' },
       // Google+ / Schema.org
-      { itemprop: 'name', content: TITLE },
-      { itemprop: 'description', content: DESC },
+      { itemprop: 'name', content: TITLE, id: 'gpt' },
+      { itemprop: 'description', content: DESC, id: 'gpd' },
       // Facebook / Open Graph
-      { property: 'og:title', content: TITLE },
-      { property: 'og:description', content: DESC },
-      { property: 'og:image', content: 'https://roleando.herokuapp.com/images/icons/icon-512x512.png' }
+      { property: 'og:title', content: TITLE, id: 'ogt' },
+      { property: 'og:description', content: DESC, id: 'ogd' },
+      { property: 'og:image', content: 'https://roleando.herokuapp.com/images/icons/icon-144x144.png' }
     ],
     script: [
       {src: 'https://cdn.auth0.com/js/lock/10.14/lock.min.js'}
