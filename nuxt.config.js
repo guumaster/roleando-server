@@ -18,15 +18,15 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {name: 'description', content: DESC, id: 'desc'},
+      {name: 'description', content: DESC, hid: 'desc'},
       // Twitter
-      { name: 'twitter:title', content: TITLE, id: 'twd' },
+      { name: 'twitter:title', content: TITLE, hid: 'twd' },
       // Google+ / Schema.org
-      { itemprop: 'name', content: TITLE, id: 'gpt' },
-      { itemprop: 'description', content: DESC, id: 'gpd' },
-      // Facebook / Open Graph
-      { property: 'og:title', content: TITLE, id: 'ogt' },
-      { property: 'og:description', content: DESC, id: 'ogd' },
+      { itemprop: 'name', content: TITLE, hid: 'gpt' },
+      { itemprop: 'description', content: DESC, hid: 'gpd' },
+      // Facebook / Open Graphd
+      { property: 'og:title', content: TITLE, hid: 'ogt' },
+      { property: 'og:description', content: DESC, hid: 'ogd' },
       { property: 'og:image', content: 'https://roleando.herokuapp.com/images/icons/icon-144x144.png' }
     ],
     script: [
@@ -79,6 +79,7 @@ module.exports = {
     '~plugins/vueawesome.js',
     '~plugins/components.js',
     '~plugins/config.js',
+    {src: '~plugins/rpg-awesome-font.js', ssr: false},
     {src: '~plugins/vuex-router-sync.js', ssr: false},
     {src: '~plugins/animate-number.js', ssr: false},
     {src: '~plugins/quill-editor.js', ssr: false}
@@ -93,6 +94,7 @@ module.exports = {
       '@guumaster/rpgen',
       'vue-awesome',
       'vuetify',
+      // 'rpg-awesome',
       'vue-quill-editor'
     ]
   }

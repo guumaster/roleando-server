@@ -28,15 +28,15 @@
       const DESC = this.generator.desc
       return {
         meta: [
-          {name: 'description', content: DESC, id: 'desc'},
+          {name: 'description', content: DESC, hid: 'desc'},
           // Twitter
-          { name: 'twitter:title', content: TITLE, id: 'twd' },
+          { name: 'twitter:title', content: TITLE, hid: 'twd' },
           // Google+ / Schema.org
-          { itemprop: 'name', content: TITLE, id: 'gpt' },
-          { itemprop: 'description', content: DESC, id: 'gpd' },
+          { itemprop: 'name', content: TITLE, hid: 'gpt' },
+          { itemprop: 'description', content: DESC, hid: 'gpd' },
           // Facebook / Open Graph
-          { property: 'og:title', content: TITLE, id: 'ogt' },
-          { property: 'og:description', content: DESC, id: 'ogd' }
+          { property: 'og:title', content: TITLE, hid: 'ogt' },
+          { property: 'og:description', content: DESC, hid: 'ogd' }
         ]
       }
     }

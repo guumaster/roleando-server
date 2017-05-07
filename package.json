@@ -43,6 +43,7 @@
     "nodemailer-sendgrid-transport": "0.2.0",
     "nuxt": "0.10.6",
     "restify-errors": "4.3.0",
+    "rpg-awesome": "0.1.1",
     "serve-favicon": "2.4.2",
     "shortid": "2.2.8",
     "sitemap": "1.12.0",
