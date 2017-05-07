@@ -2,7 +2,7 @@
   <div class="ribbon">
     <span>
       <slot>
-        <v-icon slot="content" class="white--text">star</v-icon>
+        <v-icon slot="content" class="yellow--text">star</v-icon>
       </slot>
     </span>
   </div>

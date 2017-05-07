@@ -1,6 +1,6 @@
 <template>
   <v-app top-toolbar class="blue-grey lighten-4">
-    <v-toolbar fixed>
+    <v-toolbar fixed class="site-toolbar">
       <v-toolbar-side-icon @click.native.stop="sidebar = !sidebar"/>
       <v-toolbar-title>Roleando</v-toolbar-title>
 
@@ -76,4 +76,9 @@
     top: 0;
     z-index: 10;
   }
+
+  .site-toolbar {
+    height: 3.4em!important;
+  }
+
 </style>
