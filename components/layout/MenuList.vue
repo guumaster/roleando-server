@@ -35,6 +35,17 @@
       </v-list-tile>
     </v-list-item>
 
+    <v-list-item>
+      <v-list-tile :href="{name: 'acerca'}" router>
+        <v-list-tile-action>
+          <v-icon>info_outline</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Acerca de</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list-item>
+
     <v-divider light/>
     <v-subheader>Ajustes</v-subheader>
 

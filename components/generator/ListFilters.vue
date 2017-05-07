@@ -7,13 +7,13 @@
              :key="item.value"
              @click.native="navigate(item.value)">
         <v-icon :class="iconColor(item)">{{item.icon}}</v-icon>
-        <span class="hidden-sm-and-down"> {{item.text}}</span>
+        <span class="hidden-sm-and-down">{{item.text}}</span>
       </v-btn>
 
       <v-spacer></v-spacer>
-      <v-btn small outline @click.native="navigate('generadores-nuevo')">
-        <v-icon>add_circle_outline</v-icon>
-        <span class="hidden-sm-and-down">Nuevo</span>
+      <v-btn small outline icon @click.native="navigate('generadores-nuevo')">
+        <v-icon>add_circle</v-icon>
+        <!--<span class="hidden-sm-and-down">Nuevo</span>-->
       </v-btn>
     </v-toolbar>
 
