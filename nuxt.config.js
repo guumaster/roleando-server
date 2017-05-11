@@ -79,7 +79,7 @@ module.exports = {
     '~plugins/vueawesome.js',
     '~plugins/components.js',
     '~plugins/config.js',
-    {src: '~plugins/rpg-awesome-font.js', ssr: false},
+    {src: '~plugins/fonts.js', ssr: false},
     {src: '~plugins/vuex-router-sync.js', ssr: false},
     {src: '~plugins/animate-number.js', ssr: false},
     {src: '~plugins/quill-editor.js', ssr: false}
@@ -94,7 +94,6 @@ module.exports = {
       '@guumaster/rpgen',
       'vue-awesome',
       'vuetify',
-      // 'rpg-awesome',
       'vue-quill-editor'
     ]
   }

@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@guumaster/rpgen": "1.2.2",
+    "@guumaster/rpgen-gameicons": "1.0.1",
     "auth0-js": "8.6.0",
     "axios": "0.16.1",
     "body-parser": "1.17.1",
@@ -43,7 +44,6 @@
     "nodemailer-sendgrid-transport": "0.2.0",
     "nuxt": "0.10.6",
     "restify-errors": "4.3.0",
-    "rpg-awesome": "0.1.1",
     "serve-favicon": "2.4.2",
     "shortid": "2.2.8",
     "sitemap": "1.12.0",
