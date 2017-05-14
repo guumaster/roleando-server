@@ -2,7 +2,7 @@ const {join} = require('path')
 const config = require('./config/browser')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-const { IgnorePlugin } = require('webpack')
+const {IgnorePlugin} = require('webpack')
 
 const dev = !(process.env.NODE_ENV === 'production')
 const label = dev ? '(local) ' : ''
@@ -10,36 +10,45 @@ const label = dev ? '(local) ' : ''
 const TITLE = 'Roleando WebApp'
 const DESC = 'Generadores aleatorios y herramientas para juegos de rol'
 
-module.exports = {
+module.exports = require('nuxt-modules')({
   dev,
   env: config,
+  /*
+   ** Extend nuxt using nuxt modules system (Alpha)
+   ** Learn more: https://github.com/nuxt/nuxt-modules
+   */
+  modules: [
+    '@nuxtjs/optimize',
+    // '@nuxtjs/offline',
+    '@nuxtjs/manifest',
+    '@nuxtjs/meta'
+  ],
   /*
    ** Headers of the page
    */
   head: {
     title: `${label}Roleando`,
     meta: [
-      {charset: 'utf-8'},
-      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      // {charset: 'utf-8'},
+      // {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {name: 'description', content: DESC, hid: 'desc'},
       // Twitter
-      { name: 'twitter:title', content: TITLE, hid: 'twd' },
+      {name: 'twitter:title', content: TITLE, hid: 'twd'},
       // Google+ / Schema.org
-      { itemprop: 'name', content: TITLE, hid: 'gpt' },
-      { itemprop: 'description', content: DESC, hid: 'gpd' },
+      {itemprop: 'name', content: TITLE, hid: 'gpt'},
+      {itemprop: 'description', content: DESC, hid: 'gpd'},
       // Facebook / Open Graphd
-      { property: 'og:title', content: TITLE, hid: 'ogt' },
-      { property: 'og:description', content: DESC, hid: 'ogd' },
-      { property: 'og:image', content: 'https://roleando.herokuapp.com/images/icons/icon-144x144.png' }
+      {property: 'og:title', content: TITLE, hid: 'ogt'},
+      {property: 'og:description', content: DESC, hid: 'ogd'},
+      {property: 'og:image', content: 'https://roleando.herokuapp.com/images/icons/icon-144x144.png'}
     ],
     script: [
-      {src: 'https://cdn.auth0.com/js/lock/10.14/lock.min.js'}
+      {src: 'https://cdn.auth0.com/js/lock/10.14/lock.min.js', async: true, body: true}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
       {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto'},
-      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
-      {rel: 'manifest', href: '/manifest.json'}
+      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
       /*
        http://www.favicon-generator.org/
        https://makeappicon.com
@@ -56,7 +65,6 @@ module.exports = {
        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-       <link rel="manifest" href="/manifest.json">
        <meta name="msapplication-TileColor" content="#ffffff">
        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
        <meta name="theme-color" content="#ffffff">
@@ -69,6 +77,58 @@ module.exports = {
   loading: {
     color: '#e81815',
     height: '3px'
+  },
+  manifest: {
+    'name': `${label}Roleando`,
+    'short_name': 'Roleando',
+    'theme_color': '#524671',
+    'background_color': '#7f7c8a',
+    'display': 'standalone',
+    'scope': '/',
+    'start_url': '/',
+    'icons': [
+      {
+        'src': 'images/icons/icon-72x72.png',
+        'sizes': '72x72',
+        'type': 'image/png'
+      },
+      {
+        'src': 'images/icons/icon-96x96.png',
+        'sizes': '96x96',
+        'type': 'image/png'
+      },
+      {
+        'src': 'images/icons/icon-128x128.png',
+        'sizes': '128x128',
+        'type': 'image/png'
+      },
+      {
+        'src': 'images/icons/icon-144x144.png',
+        'sizes': '144x144',
+        'type': 'image/png'
+      },
+      {
+        'src': 'images/icons/icon-152x152.png',
+        'sizes': '152x152',
+        'type': 'image/png'
+      },
+      {
+        'src': 'images/icons/icon-192x192.png',
+        'sizes': '192x192',
+        'type': 'image/png'
+      },
+      {
+        'src': 'images/icons/icon-384x384.png',
+        'sizes': '384x384',
+        'type': 'image/png'
+      },
+      {
+        'src': 'images/icons/icon-512x512.png',
+        'sizes': '512x512',
+        'type': 'image/png'
+      }
+    ],
+    'splash_pages': null
   },
   // router: {
   //   linkActiveClass: 'nuxt-link-active test'
@@ -85,12 +145,15 @@ module.exports = {
     {src: '~plugins/fonts.js', ssr: false},
     {src: '~plugins/vuex-router-sync.js', ssr: false},
     {src: '~plugins/animate-number.js', ssr: false},
-    {src: '~plugins/quill-editor.js', ssr: false}
+    {src: '~plugins/quill-editor.js', ssr: false},
+    {src: '~plugins/offline.js', ssr: false}
   ],
   css: [
     {src: join(__dirname, 'css/app.styl'), lang: 'styl'}
   ],
+  offline: true,
   build: {
+    extractCSS: true,
     plugins: [
       new IgnorePlugin(/^\.\/locale$/, /moment$/),
       new LodashModuleReplacementPlugin(),
@@ -112,4 +175,4 @@ module.exports = {
       'lodash'
     ]
   }
-}
+})

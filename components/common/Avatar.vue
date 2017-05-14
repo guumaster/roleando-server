@@ -1,6 +1,6 @@
 <template>
   <div class="avatar ma-1">
-    <img :class="classSize" class="elevation-2" :src="src"/>
+    <img :class="classSize" class="elevation-2" :src="src" :alt="alt"/>
   </div>
 </template>
 <script>
@@ -12,6 +12,10 @@
       size: {
         type: String,
         default: 'normal'
+      },
+      alt: {
+        type: String,
+        default: ''
       }
     },
     computed: {

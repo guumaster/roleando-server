@@ -1,6 +1,6 @@
 <template>
   <div class="logo text-xs-center">
-    <img  :class="classSize" src="/images/icons/icon-512x512.png" />
+    <img  :class="classSize" src="/images/icons/icon-512x512.png" alt="Roleando"/>
   </div>
 </template>
 <script>

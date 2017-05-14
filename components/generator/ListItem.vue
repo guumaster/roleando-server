@@ -8,10 +8,10 @@
 
         <v-list-tile-content :class="{ 'pl-3': !featured}">
           <v-list-tile-title v-text="generator.name"/>
-          <v-list-tile-sub-title v-text="generator.desc"/>
+          <v-list-tile-sub-title> {{generator.desc}} - {{created}}</v-list-tile-sub-title>
         </v-list-tile-content>
 
-          <avatar size="small" :src="generator.author.picture"/>
+          <avatar size="small" :src="generator.author.picture" :alt="generator.author.name"/>
 
       </v-list-tile>
     </v-list-item>

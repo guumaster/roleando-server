@@ -6,7 +6,7 @@
 
       <v-spacer></v-spacer>
       <v-btn icon dark>
-        <avatar v-if="profilePicture" size="small" :src="profilePicture"/>
+        <avatar v-if="profilePicture" size="small" :src="profilePicture" :alt="profileName"/>
         <icon v-else name="user-circle" scale="2"></icon>
       </v-btn>
     </v-toolbar>
@@ -48,6 +48,9 @@
         if (!this.isLogged) return
 
         return `${this.user.profile.picture}?sz=50`
+      },
+      profileName () {
+        return (!this.isLogged) ? this.user.profile.name : ''
       }
     },
     methods: {
@@ -66,6 +69,7 @@
   }
 </script>
 <style>
+
   a {
     text-decoration: none;
   }

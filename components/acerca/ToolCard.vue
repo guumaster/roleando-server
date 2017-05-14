@@ -15,7 +15,7 @@
 </template>
 <script>
   export default {
-    props: ['linkTo'],
+    props: ['linkTo']
   }
 </script>
 <style scoped>
