@@ -1,5 +1,8 @@
 const {join} = require('path')
 const config = require('./config/browser')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const { IgnorePlugin } = require('webpack')
 
 const dev = !(process.env.NODE_ENV === 'production')
 const label = dev ? '(local) ' : ''
@@ -88,13 +91,25 @@ module.exports = {
     {src: join(__dirname, 'css/app.styl'), lang: 'styl'}
   ],
   build: {
+    plugins: [
+      new IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new LodashModuleReplacementPlugin(),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        generateStatsFile: true,
+        openAnalyzer: false,
+        logLevel: 'info'
+      })
+    ],
     vendor: [
       'localforage',
       'axios',
       '@guumaster/rpgen',
       'vue-awesome',
       'vuetify',
-      'vue-quill-editor'
+      'vue-quill-editor',
+      'moment',
+      'lodash'
     ]
   }
 }
