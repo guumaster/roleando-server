@@ -10,7 +10,7 @@ const extractTableNames = (generator) => {
   names = scopes.reduce((all, scope) => {
     return all
       .concat(getTableNames(generator.children[scope].tables)
-      .map(name => `${scope}.${name}`))
+        .map(name => `${scope}.${name}`))
   }, names)
   return names
 }

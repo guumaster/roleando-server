@@ -102,7 +102,6 @@
           this.disabled = false
         } catch (e) {
           this.disabled = true
-//          console.log(e)
         }
       }, 300)
     },

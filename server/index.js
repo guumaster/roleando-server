@@ -3,9 +3,7 @@
 import Nuxt from 'nuxt'
 import express from 'express'
 import errors from 'restify-errors'
-import bodyParser from 'body-parser'
 
-import routes from './routes'
 import config from '../config'
 
 const nuxtConfig = require('../nuxt.config.js')
@@ -13,11 +11,6 @@ const nuxtConfig = require('../nuxt.config.js')
 const app = express({
   name: config.name
 })
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-
-app.use(routes)
 
 app.use((err, req, res, next) => {
   console.error(err.message, err.stack)
