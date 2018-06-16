@@ -4,11 +4,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const {IgnorePlugin} = require('webpack')
 
-const dev = !(process.env.NODE_ENV === 'production')
+const dev = !(process.env.NODE_ENV === 'production') // eslint-disable-line no-process-env
 const label = dev ? '(local) ' : ''
 
-const TITLE = 'Roleando WebApp'
-const DESC = 'Generadores aleatorios y herramientas para juegos de rol'
+const TITLE = 'Rolodromo.com'
+const DESC = 'Herramientas digitales para tus juegos de rol'
 
 module.exports = require('nuxt-modules')({
   dev,
@@ -41,9 +41,6 @@ module.exports = require('nuxt-modules')({
       {property: 'og:title', content: TITLE, hid: 'ogt'},
       {property: 'og:description', content: DESC, hid: 'ogd'},
       {property: 'og:image', content: 'https://roleando.herokuapp.com/images/icons/icon-144x144.png'}
-    ],
-    script: [
-      {src: 'https://cdn.auth0.com/js/lock/10.14/lock.min.js', async: true, body: true}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},

@@ -9,6 +9,7 @@
   import { mapGetters, mapActions } from 'vuex'
 
   import config from '~plugins/config'
+  import * as auth0 from 'auth0-js'
 
   export default {
     created () {
@@ -20,14 +21,19 @@
       const AUTH0_CLIENT_ID = config.auth0.clientId
       const AUTH0_DOMAIN = config.auth0.domain
 
-      const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, { // eslint-disable-line no-undef
-        auth: {
-          redirectUrl: AUTH0_CALLBACK_URL,
-          responseType: 'token'
-        }
+      const webAuth = new auth0.WebAuth({
+        domain: AUTH0_DOMAIN,
+        clientID: AUTH0_CLIENT_ID,
+        redirectUri: AUTH0_CALLBACK_URL,
+        scope: 'openid profile email',
+        responseType: 'token id_token'
       })
 
-      lock.on('authenticated', async (authResult) => {
+      webAuth.parseHash({ hash: window.location.hash }, async (err, authResult) => {
+        if (err) {
+          return console.log(err)
+        }
+
         console.log('Auth0 token: ', authResult.accessToken)
         this.login(authResult)
           .then(() => {
